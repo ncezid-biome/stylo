@@ -2,7 +2,6 @@ process MEDAKA {
     tag "$meta.id"
     label 'process_high'
 
-    conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/medaka%3A2.0.1--py310he807b20_0' :
         'biocontainers/medaka:2.0.1--py310he807b20_0' }"
