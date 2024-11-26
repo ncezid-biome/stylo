@@ -8,7 +8,8 @@ process SOCRU {
         'https://depot.galaxyproject.org/singularity/socru%3A2.2.4--py_1'}"
 
     input:
-    tuple val(meta), val(species), path(assembly)
+    tuple val(meta), path(assembly),
+    tuple val(meta), val(socru_species) // post lookup table
 
     output:
     tuple val(meta), path("*_output.tsv"), emit: output
@@ -23,7 +24,7 @@ process SOCRU {
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     socru \\
-        ${species} \\
+        ${socru_species} \\
         ${assembly} \\
         $args \\
         -t $task.cpus \\

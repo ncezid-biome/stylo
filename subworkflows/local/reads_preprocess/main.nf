@@ -1,5 +1,5 @@
 //
-// Subworkflow with functionality specific to the ncezid-narst/ontmethylationfinder pipeline
+// Subworkflow with functionality specific to the narst/stylo pipeline
 //
 
 /*
@@ -31,22 +31,23 @@ workflow READS_PREPROCESSING {
     //
     NANOQ (
         ch_samplesheet.map { meta, reads, genus, species, genome_size -> tuple (meta, reads) },
-        "fastq.gz"
+        params.nanoq_format
     )
     ch_versions = ch_versions.mix(NANOQ.out.versions)
 
     //
     // MODULE: downsampling to specific coverage
     //
-    // TODO: continue here
-    // mix in genome size to NANOQ.out.fastq?
+    ch_genome_size = ch_samplesheet.map { meta, reads, genus, species, genome_size -> tuple (meta, genome_size) }
+    ch_rasusa_in = NANOQ.out.reads.combine( ch_genome_size, by: 0 )
+
     RASUSA (
-        NANOQ.out.fasta
+        ch_rasusa_in,
+        params.coverage
     )
     ch_versions = ch_versions.mix(RASUSA.out.versions)
 
     emit:
-    fasta = EDIT_CONTIGS.out.fasta
-    bin = GENERATE_BINS.out.bin
+    reads = RASUSA.out.reads
     versions = ch_versions
 }

@@ -12,9 +12,9 @@ process NANOQ {
     val(output_format) //One of the following: fastq, fastq.gz, fastq.bz2, fastq.lzma, fasta, fasta.gz, fasta.bz2, fasta.lzma.
 
     output:
-    tuple val(meta), path("*.{stats,json}")                                           , emit: stats
-    tuple val(meta), path("*_filtered.${output_format}")                              , emit: reads
-    path "versions.yml"                                                               , emit: versions
+    tuple val(meta), path("*.{stats,json}")              , emit: stats
+    tuple val(meta), path("*_filtered.${output_format}") , emit: reads
+    path "versions.yml"                                  , emit: versions
 
     when:
     task.ext.when == null || task.ext.when

@@ -41,7 +41,26 @@ workflow STYLO {
     )
     ch_versions = ch_versions.mix(READS_PREPROCESSING.out.versions)
 
-    // TODO: add other subworkflows ASSEMBLY, POSTPROCESSING_QC
+    //
+    // SUBWORKFLOW: assemble reads
+    //
+    ASSEMBLY (
+        READS_PREPROCESSING.out.reads
+    )
+    ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
+
+    //
+    // SUBWORKFLOW: postprocess and qc assembly
+    //
+    // takes reads from preprocessing not original reads READS_PREPROCESSING.out.reads
+    ch_genus_species = ch_samplesheet.map { meta, reads, genus, species, genome_size -> tuple (meta, genus, species) }
+
+    POSTPROCESSING_QC (
+        ASSEMBLY.out.assembly,
+        READS_PREPROCESSING.out.reads,
+        ch_genus_species
+    )
+    ch_versions = ch_versions.mix(POSTPROCESSING_QC.out.versions)
 
     //
     // Collate and save software versions

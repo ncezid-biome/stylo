@@ -7,7 +7,9 @@ process MEDAKA {
         'biocontainers/medaka:2.0.1--py310he807b20_0' }"
 
     input:
-    tuple val(meta), path(reads), path(assembly)
+    tuple val(meta), path(reads)
+    tuple val(meta), path(assembly)
+    tuple val(meta), val(model)
 
     output:
     tuple val(meta), path("*.fa.gz"), emit: assembly
@@ -19,12 +21,19 @@ process MEDAKA {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    // def medaka_model = model == '' ? params.medaka_model : model
+    if (model == "") {
+        def medaka_model = params.medaka_model
+    } else {
+        def medaka_model = model
+    }
     """
     medaka_consensus \\
         -t $task.cpus \\
         $args \\
         -i $reads \\
         -d $assembly \\
+        -m $medaka_model \\
         -o ./
 
     mv consensus.fasta ${prefix}.fa
