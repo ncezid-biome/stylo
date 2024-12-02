@@ -28,16 +28,19 @@ workflow STYLO {
     ch_versions = Channel.empty()
     // ch_multiqc_files = Channel.empty()
 
-    // TODO: run genus-spieces lookup functions
-    // need genome_size, socru_type
-    // function to extract params from lookup table
-    // need to ch.mix params into samplesheet channel
+    ch_lookup_table = Channel.fromPath( "../conf/lookup_table.tsv" )
+        .splitCsv( sep: "\t" ) 
+        .map { row -> [ row[0], row[1], row[2], row[3] ] } // genus, species, genome_size, socru_species
+    // TODO: call function
+    ch_samplesheet_plus.view()
 
+    // TODO:uncomment
+    /*
     //
     // SUBWORKFLOW: readfiltering and downsampling reads
     //
     READS_PREPROCESSING (
-        ch_samplesheet // includes genome size mixed in
+        ch_samplesheet.combine( ch_genome_size, by: 0)
     )
     ch_versions = ch_versions.mix(READS_PREPROCESSING.out.versions)
 
@@ -111,6 +114,7 @@ workflow STYLO {
     //     ch_multiqc_custom_config.toList(),
     //     ch_multiqc_logo.toList()
     // )
+    */
 
     emit:
     // multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
@@ -118,6 +122,22 @@ workflow STYLO {
     versions       = ch_versions                 // channel: [ path(versions.yml) ]
 }
 
+
+// lookup function for each row of samplesheet
+// input row from samplsheet
+// output row + genome_size + ssocru species
+def lookup(samplesheet_row, ch_lookup_table) {
+    ch_filtered_lookup = ch_lookup_table.map { genus, species, genome_size, socru_species ->
+        tuple( genus.filter( samplesheet_row[2] ), species.filter( samplesheet_row[3] ), genome_size, socru_species )
+    }
+    // assume genus and species
+    // if empty search for genus -
+    // TODO: filter
+    ch_filtered_lookup = ch_lookup_table.map { genus, species, genome_size, socru_species ->
+        tuple( genus.filter( ch_samplesheet[2] ), species.filter( ch_samplesheet[3] ), genome_size, socru_species )
+    }
+    // TODO: modify samplesheet_row and return it
+}
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     THE END
