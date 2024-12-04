@@ -43,7 +43,8 @@ workflow NARST_STYLO {
     )
 
     emit:
-    multiqc_report = STYLO.out.multiqc_report // channel: /path/to/multiqc_report.html
+    versions = STYLO.out.versions
+    // multiqc_report = STYLO.out.multiqc_report // channel: /path/to/multiqc_report.html
 
 }
 /*
@@ -86,7 +87,8 @@ workflow {
         params.outdir,
         params.monochrome_logs,
         params.hook_url,
-        NARST_STYLO.out.multiqc_report
+        []
+        // NARST_STYLO.out.multiqc_report
     )
 }
 

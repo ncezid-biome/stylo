@@ -30,7 +30,7 @@ workflow READS_PREPROCESSING {
     // MODULE: readfiltering ONT longreads
     //
     NANOQ (
-        ch_samplesheet.map { meta, reads, genus, species, genome_size -> tuple (meta, reads) },
+        ch_samplesheet.map { meta, reads, genus, species, genome_size, socru_species -> tuple (meta, reads) },
         params.nanoq_format
     )
     ch_versions = ch_versions.mix(NANOQ.out.versions)
