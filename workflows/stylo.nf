@@ -30,16 +30,18 @@ workflow STYLO {
     // ch_multiqc_files = Channel.empty()
 
     // ch_lookup_table = Channel.fromPath( "../conf/lookup_table.tsv" )
-    ch_lookup_table = Channel.fromPath( "/scicomp/home-pure/pps0/1.projects/20240118_nf-core_conversion_Justin/1.stylo/1.nf-core_rebuild/stylo/conf/lookup_table.tsv" )
-        .splitCsv( sep: "\t" ) 
-        .map { row -> [ row[0], row[1], row[2], row[3] ] } // genus, species, genome_size, socru_species
-    ch_lookup_table.view()
+    // ch_lookup_table = Channel.fromPath( "/scicomp/home-pure/pps0/1.projects/20240118_nf-core_conversion_Justin/1.stylo/1.nf-core_rebuild/stylo/conf/lookup_table.tsv" )
+    //     .splitCsv( sep: "\t" ) 
+    //     .map { row -> [ row[0], row[1], row[2], row[3] ] } // genus, species, genome_size, socru_species
+    // ch_lookup_table.view()
     println "1"
 
     // ERROR:  Invalid method invocation `call` with arguments: [[id:sample1], /scicomp/home-pure/pps0/1.projects/20240118_nf-core_conversion_Justin/1.stylo/9.test/20241204_nf_rebuild_lookup_test/sample1.fastq.gz, Salmonella, enterica] (java.util.ArrayList) on _closure5 type
-    ch_samplesheet_plus = ch_samplesheet.map ( samplesheet_row -> lookup(samplesheet_row, ch_lookup_table) )
-    
-    ch_samplesheet_plus.view()
+    // ch_samplesheet_plus = ch_samplesheet.map ( samplesheet_row -> lookup(samplesheet_row, ch_lookup_table) )
+    // lookup(ch_samplesheet.first(), ch_lookup_table).view()
+    println "4"
+
+    // ch_samplesheet_plus.view()
 
     // TODO:uncomment
     /*
@@ -122,31 +124,30 @@ workflow STYLO {
     //     ch_multiqc_logo.toList()
     // )
     */
-
+    println "5"
     emit:
     // multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
     // TODO: include emitted channels from subworkflows
     versions       = ch_versions                 // channel: [ path(versions.yml) ]
 }
 
-
 // lookup function for each row of samplesheet
 // input row from samplsheet
 // output row + genome_size + ssocru species
-def lookup(samplesheet_row, ch_lookup_table) {
-    println "2"
-    // assume genus and species
-    // if empty search for genus -
-    ch_filtered_lookup = ch_lookup_table.map { genus, species, genome_size, socru_species ->
-        tuple( genus.filter( samplesheet_row[2] ), species.filter( samplesheet_row[3] ), genome_size, socru_species )
-    }.ifEmpty (
-        ch_lookup_table.map { genus, species, genome_size, socru_species ->
-            tuple( genus.filter( samplesheet_row[2] ), species.filter( '-' ), genome_size, socru_species )
-        }
-    ).map { genus, species, genome_size, socru_species -> tuple( genome_size, socru_species ) }
-    println "3"
-    return samplesheet_row.concat( ch_filtered_lookup )
-}
+// def lookup(samplesheet_row, ch_lookup_table) {
+//     println "2"
+//     // assume genus and species
+//     // if empty search for genus -
+//     ch_filtered_lookup = ch_lookup_table.map { genus, species, genome_size, socru_species ->
+//         tuple( genus.filter( samplesheet_row[2] ), species.filter( samplesheet_row[3] ), genome_size, socru_species )
+//     }.ifEmpty (
+//         ch_lookup_table.map { genus, species, genome_size, socru_species ->
+//             tuple( genus.filter( samplesheet_row[2] ), species.filter( '-' ), genome_size, socru_species )
+//         }
+//     ).map { genus, species, genome_size, socru_species -> tuple( genome_size, socru_species ) }
+//     println "3"
+//     return samplesheet_row.concat( ch_filtered_lookup )
+// }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     THE END
