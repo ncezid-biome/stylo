@@ -30,55 +30,36 @@ workflow STYLO {
     // ch_multiqc_files = Channel.empty()
 
     // ch_lookup_table = Channel.fromPath( "../conf/lookup_table.tsv" )
+    // TODO: replace with relative path 
     ch_lookup_table = Channel.fromPath( "/scicomp/home-pure/pps0/1.projects/20240118_nf-core_conversion_Justin/1.stylo/1.nf-core_rebuild/stylo/conf/lookup_table.tsv" )
         .splitCsv( sep: "\t" ) 
         .map { row -> [[ row[0], row[1], row[2], row[3] ]] } // genus, species, genome_size, socru_species
 
-    
-    // maybe use combine with a [genus, species] tuple?
-    // 1 or 2 .first()
     ch_samplesheet_reordered = ch_samplesheet.map { meta, fastq, genus, species -> [[genus, species, meta, fastq]] }
     ch_samplesheet_plus_gs = ch_samplesheet_reordered.combine(ch_lookup_table)
         .filter( row -> row[0][0] == row[1][0] ) // samplesheet genus matches lookup genus
         .filter( row -> row[0][1] == row[1][1] ) // samplesheet species matches lookup species
-        // .branch { row ->
-        //     gs: row[0][1] == row[1][1] // samplesheet species matches lookup species
-        //     g: row[0][1] != row[1][1] & row[1][1] == '-' // samplesheet species doesnt match lookup species
-        // }
-    // .view()
-    // ch_samplesheet_plus_gs.map ( it -> it[0][2].id ).view()
     ch_samplesheet_plus_g = ch_samplesheet_reordered.combine(ch_lookup_table)
-        // .filter( row -> row[0][2].id == ['sample1','sample2'])
         .filter( row -> row[0][0] == row[1][0] ) // samplesheet genus matches lookup genus
-        .filter( row -> row[1][1] == '-' ) // samplesheet species matches lookup species
-    // .view()
+        .filter( row -> row[1][1] == '-' ) // samplesheet species doesn't match lookup species
 
+    //TODO once fully tested remove the duplicate genus and species
     ch_samplesheet_plus = ch_samplesheet_plus_gs
+        // combine both conditional samplesheets in order
         .concat(ch_samplesheet_plus_g)
+        // remap to remove extra []
+        // meta, genus, species, fasta, genus ,species, genome_size, socru_species
         .map {
             row -> [row[0][2], row[0][0], row[0][1], row[0][3], row[1][0], row[1][1], row[1][2], row[1][3]]
         }
+        // group by meta id
         .groupTuple(by:0)
+        // take first element of each group
         .map {
             row -> [ row[0], row[1][0], row[2][0], row[3][0], row[4][0], row[5][0], row[6][0], row[7][0] ]
         }
-        .view()
     
-    // ch_samplesheet_plus = ch_samplesheet_reordered.combine( ch_lookup_table, by:0 )
-
-    // ch_samplesheet.map {
-    //     meta, fastq, genus, species -> [meta, fastq, genus, species, lookup(genus, species, ch_lookup_table)]
-    // }.view()
-    // // lookup('Salmonella', 'enterica', ch_lookup_table)
-
-
-
-    // ERROR:  Invalid method invocation `call` with arguments: [[id:sample1], /scicomp/home-pure/pps0/1.projects/20240118_nf-core_conversion_Justin/1.stylo/9.test/20241204_nf_rebuild_lookup_test/sample1.fastq.gz, Salmonella, enterica] (java.util.ArrayList) on _closure5 type
-    // ch_samplesheet_plus = ch_samplesheet.map { meta, fastq, genus, species -> [meta, fastq, genus, species, lookup(genus, species, ch_lookup_table)] }
-    // ch_samplesheet.map { meta, fastq, genus, species -> [genus] }.first().view()
-    // lookup(ch_samplesheet.first(), ch_lookup_table).view()
-
-    // ch_samplesheet_plus.view()
+    ch_samplesheet_plus.view()
 
     // TODO:uncomment
     /*
@@ -167,23 +148,6 @@ workflow STYLO {
     versions       = ch_versions                 // channel: [ path(versions.yml) ]
 }
 
-// lookup function for each row of samplesheet
-// input row from samplsheet
-// output row + genome_size + ssocru species
-def lookup(sample_genus, sample_species, ch_lookup_table) {
-    // assume genus and species
-    // if empty search for genus -
-    // ch_samplesheet_row = Channel.of(samplesheet_row)
-    // println samplesheet_row.toList()[2]
-    ch_filtered_lookup = ch_lookup_table.filter( it -> it[0] == sample_genus )
-    .filter( it -> it[1] == sample_species )
-    .ifEmpty (
-        ch_lookup_table.filter( it -> it[0] == sample_genus )
-        .filter( it -> it[1] == '-' )
-    )
-    .map { genus, species, genome_size, socru_species -> tuple( genome_size, socru_species ) }
-    return ch_filtered_lookup
-}
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     THE END
