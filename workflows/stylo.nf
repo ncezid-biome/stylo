@@ -5,7 +5,7 @@
 */
 
 // TODO: uncomment
-// include { READS_PREPROCESSING    } from '../subworkflows/local/reads_preprocess'
+include { READS_PREPROCESSING    } from '../subworkflows/local/reads_preprocess'
 // include { ASSEMBLY               } from '../subworkflows/local/assembly'
 // include { POSTPROCESSING_QC      } from '../subworkflows/local/postprocessing_qc'
 include { paramsSummaryMap       } from 'plugin/nf-validation'
@@ -35,6 +35,39 @@ workflow STYLO {
         .splitCsv( sep: "\t" ) 
         .map { row -> [[ row[0], row[1], row[2], row[3] ]] } // genus, species, genome_size, socru_species
 
+    // TODO: check for spelling errors
+    // samplesheet
+    // [1,2,3,4] // genus and species flattened
+    // [1,s]
+    // [2,s]
+    // [3,s]
+    // [4,s]
+    // llookuptable
+    // [1,2,3,5] // genus and species flattened
+    // [1,l]
+    // [2,l]
+    // [3,l]
+    // [5,l]
+    // grouptuple
+    // [1,[s,l]]
+    // [2,[s,l]]
+    // [3,[s,l]]
+    // [4,[s]] // WARN
+    // [5,[l]] // no problem
+    // .filter [*,[s]]
+    // .filter ( row -> row[1] == ['s'])
+    // [4,[s]]
+    // option 1
+    //     .count()
+    //     1
+    //     if count > 0 how to do this?
+    //         warning a genus or species might be misspelled
+    // option 2
+    //     for element in channel
+    //         warning element might be misspelled
+    // maybe a function will work better here
+
+
     ch_samplesheet_reordered = ch_samplesheet.map { meta, fastq, genus, species -> [[genus, species, meta, fastq]] }
     ch_samplesheet_plus_gs = ch_samplesheet_reordered.combine(ch_lookup_table)
         .filter( row -> row[0][0] == row[1][0] ) // samplesheet genus matches lookup genus
@@ -48,29 +81,30 @@ workflow STYLO {
         // combine both conditional samplesheets in order
         .concat(ch_samplesheet_plus_g)
         // remap to remove extra []
-        // meta, genus, species, fasta, genus ,species, genome_size, socru_species
+        // meta, genus, species, fasta, genome_size, socru_species
         .map {
-            row -> [row[0][2], row[0][0], row[0][1], row[0][3], row[1][0], row[1][1], row[1][2], row[1][3]]
+            row -> [row[0][2], row[0][0], row[0][1], row[0][3], row[1][2], row[1][3]]
         }
         // group by meta id
         .groupTuple(by:0)
         // take first element of each group
+        // meta, fasta, genus, species, genome_size, socru_species
         .map {
-            row -> [ row[0], row[1][0], row[2][0], row[3][0], row[4][0], row[5][0], row[6][0], row[7][0] ]
+            row -> [ row[0], row[3][0], row[1][0], row[2][0], row[4][0], row[5][0] ]
         }
     
-    ch_samplesheet_plus.view()
+    ch_samplesheet_plus
 
     // TODO:uncomment
-    /*
     //
     // SUBWORKFLOW: readfiltering and downsampling reads
     //
     READS_PREPROCESSING (
-        ch_samplesheet.combine( ch_genome_size, by: 0)
+        ch_samplesheet_plus
     )
     ch_versions = ch_versions.mix(READS_PREPROCESSING.out.versions)
 
+    /*
     //
     // SUBWORKFLOW: assemble reads
     //
@@ -83,7 +117,7 @@ workflow STYLO {
     // SUBWORKFLOW: postprocess and qc assembly
     //
     // takes reads from preprocessing not original reads READS_PREPROCESSING.out.reads
-    ch_genus_species = ch_samplesheet.map { meta, reads, genus, species, genome_size -> tuple (meta, genus, species) }
+    ch_genus_species = ch_samplesheet_plus.map { meta, reads, genus, species, genome_size, socru_species -> tuple (meta, genus, species) }
 
     POSTPROCESSING_QC (
         ASSEMBLY.out.assembly,

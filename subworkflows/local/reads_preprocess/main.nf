@@ -8,8 +8,8 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { NANOQ  } from '../../../modules/local/nanoq/main'
-include { RASUSA } from '../../../modules/local/rasusa/main'
+include { NANOQ  } from '../../../modules/nf-core/nanoq/main'
+include { RASUSA } from '../../../modules/nf-core/rasusa/main'
 
 /*
 ========================================================================================
@@ -38,8 +38,8 @@ workflow READS_PREPROCESSING {
     //
     // MODULE: downsampling to specific coverage
     //
-    ch_genome_size = ch_samplesheet.map { meta, reads, genus, species, genome_size -> tuple (meta, genome_size) }
-    ch_rasusa_in = NANOQ.out.reads.combine( ch_genome_size, by: 0 )
+    ch_genome_size = ch_samplesheet.map { meta, reads, genus, species, genome_size, socru_species -> tuple (meta, genome_size) }
+    ch_rasusa_in = NANOQ.out.reads.combine( ch_genome_size, by: 0 ).view()
 
     RASUSA (
         ch_rasusa_in,

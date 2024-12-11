@@ -11,7 +11,7 @@
 include { CIRCLATOR_FIXSTART } from '../../../modules/local/circlator/fixstart/main'
 include { MEDAKA             } from '../../../modules/local/medaka/main'
 include { SOCRU              } from '../../../modules/local/socru/main'
-include { BUSCO              } from '../../../modules/local/busco/main'
+include { BUSCO              } from '../../../modules/nf-core/busco/main'
 
 /*
 ========================================================================================

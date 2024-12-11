@@ -7,6 +7,6 @@ Campylobacter	jejuni	1.6	Campylobacter_jejuni
 Campylobacter	coli	1.6	Campylobacter_coli
 Campylobacter	upsaliensis	1.6	Campylobacter_sp.
 Vibrio	-	5.0	Vibrio_sp.
-Vibrio	cholerae	5.0	Vibrio_sp.
+Vibrio	cholerae	5.0	Vibrio_cholerae
 Vibrio	parahaemolyticus	5.0	Vibrio_parahaemolyticus
-Yersiniae	-	4.6	Yersinia_enterocolitica
+Yersinia	-	4.6	Yersinia_enterocolitica
