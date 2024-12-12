@@ -39,7 +39,7 @@ workflow READS_PREPROCESSING {
     // MODULE: downsampling to specific coverage
     //
     ch_genome_size = ch_samplesheet.map { meta, reads, genus, species, genome_size, socru_species -> tuple (meta, genome_size) }
-    ch_rasusa_in = NANOQ.out.reads.combine( ch_genome_size, by: 0 ).view()
+    ch_rasusa_in = NANOQ.out.reads.combine( ch_genome_size, by: 0 )
 
     RASUSA (
         ch_rasusa_in,

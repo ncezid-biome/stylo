@@ -24,7 +24,7 @@ workflow POSTPROCESSING_QC {
     take:
     ch_assembly // meta, assembly
     ch_processed_reads // meta, processed_reads
-    ch_genus_species // meta, genus, species
+    ch_socru_species // meta, socru_species
     
     main:
 
@@ -38,15 +38,11 @@ workflow POSTPROCESSING_QC {
     )
     ch_versions = ch_versions.mix(CIRCLATOR_FIXSTART.out.versions)
 
-    // TDOD: implement header extraction code
-
     //
     // MODULE: create consensus sequences
     //
     MEDAKA (
-        ch_processed_reads,
-        CIRCLATOR_FIXSTART.out.assembly,
-        ch_medaka_model
+        ch_processed_reads.combine(CIRCLATOR_FIXSTART.out.assembly, by:0)
     )
     ch_versions = ch_versions.mix(MEDAKA.out.versions)
 
@@ -65,7 +61,7 @@ workflow POSTPROCESSING_QC {
     BUSCO (
         MEDAKA.out.assembly,
         params.busco_mode,
-        params.lineage,
+        params.lineage, //TODO: double check that this works correctly (auto-prok)
         [],
         []
     )

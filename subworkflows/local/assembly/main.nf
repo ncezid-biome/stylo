@@ -8,7 +8,8 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { FLYE } from '../../../modules/nf-core/flye/main'
+//TODO: delete nf-core version of flye
+include { FLYE } from '../../../modules/local/flye/main'
 
 /*
 ========================================================================================
@@ -20,6 +21,7 @@ workflow ASSEMBLY {
 
     take:
     ch_reads // meta, rasusa reads
+    ch_genome_size // meta, genome_size
 
     main:
 
@@ -29,10 +31,10 @@ workflow ASSEMBLY {
     // MODULE: assembly ONT longreads
     //
     FLYE (
-        ch_reads,
+        ch_reads.combine(ch_genome_size, by:0).view(),
         params.flye_mode
     )
-    ch_versions = ch_versions.mix(NANOQ.out.versions)
+    ch_versions = ch_versions.mix(FLYE.out.versions)
 
 
     emit:

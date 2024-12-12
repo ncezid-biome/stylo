@@ -6,7 +6,7 @@
 
 // TODO: uncomment
 include { READS_PREPROCESSING    } from '../subworkflows/local/reads_preprocess'
-// include { ASSEMBLY               } from '../subworkflows/local/assembly'
+include { ASSEMBLY               } from '../subworkflows/local/assembly'
 // include { POSTPROCESSING_QC      } from '../subworkflows/local/postprocessing_qc'
 include { paramsSummaryMap       } from 'plugin/nf-validation'
 // include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -93,7 +93,7 @@ workflow STYLO {
             row -> [ row[0], row[3][0], row[1][0], row[2][0], row[4][0], row[5][0] ]
         }
     
-    ch_samplesheet_plus
+    ch_samplesheet_plus.view()
 
     // TODO:uncomment
     //
@@ -104,25 +104,26 @@ workflow STYLO {
     )
     ch_versions = ch_versions.mix(READS_PREPROCESSING.out.versions)
 
-    /*
     //
     // SUBWORKFLOW: assemble reads
     //
     ASSEMBLY (
-        READS_PREPROCESSING.out.reads
+        READS_PREPROCESSING.out.reads,
+        ch_samplesheet_plus.map { meta, fasta, genus, species, genome_size, socru_species -> [meta, genome_size] }
     )
     ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
 
+    /*
     //
     // SUBWORKFLOW: postprocess and qc assembly
     //
     // takes reads from preprocessing not original reads READS_PREPROCESSING.out.reads
-    ch_genus_species = ch_samplesheet_plus.map { meta, reads, genus, species, genome_size, socru_species -> tuple (meta, genus, species) }
+    ch_socru_species = ch_samplesheet_plus.map { meta, reads, genus, species, genome_size, socru_species -> tuple (meta, socru_species) }
 
     POSTPROCESSING_QC (
         ASSEMBLY.out.assembly,
         READS_PREPROCESSING.out.reads,
-        ch_genus_species
+        ch_socru_species
     )
     ch_versions = ch_versions.mix(POSTPROCESSING_QC.out.versions)
 

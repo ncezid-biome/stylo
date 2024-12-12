@@ -7,3 +7,5 @@ testing/
 testing*
 *.pyc
 stylo.bak/
+nextflow_flye_min_overlap.config
+nextflow_no_flye_min_overlap.config

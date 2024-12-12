@@ -79,7 +79,7 @@ workflow PIPELINE_INITIALISATION {
     Channel
         .fromSamplesheet("input")
         .map {
-            meta, fastq, genus, species -> [meta, fastq, genus, species ]
+            meta, fastq, genus, species -> [meta + [ single_end:true ], fastq, genus, species ]
         }
         .set { ch_samplesheet }
 
