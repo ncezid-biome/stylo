@@ -7,19 +7,12 @@
                 "nf-core": {
                     "busco/busco": {
                         "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "git_sha": "9a19690b0a3fae05fa1a6ad90a0720d681429e31",
                         "installed_by": [
                             "modules"
                         ]
                     },
                     "flye": {
-                        "branch": "master",
-                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
-                        "installed_by": [
-                            "modules"
-                        ]
-                    },
-                    "medaka": {
                         "branch": "master",
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
                         "installed_by": [

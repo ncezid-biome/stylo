@@ -11,7 +11,7 @@
 include { CIRCLATOR_FIXSTART } from '../../../modules/local/circlator/fixstart/main'
 include { MEDAKA             } from '../../../modules/local/medaka/main'
 include { SOCRU              } from '../../../modules/local/socru/main'
-include { BUSCO              } from '../../../modules/nf-core/busco/main'
+include { BUSCO_BUSCO        } from '../../../modules/nf-core/busco/busco/main'
 
 /*
 ========================================================================================
@@ -49,6 +49,7 @@ workflow POSTPROCESSING_QC {
     //
     // MODULE: identify the order and orientation of complete genomes
     //
+    //TODO: figure out whats getting messed up before socru is run, might have to do with mutliple seperated channels being input
     SOCRU (
         MEDAKA.out.assembly,
         ch_socru_species
@@ -58,14 +59,14 @@ workflow POSTPROCESSING_QC {
     //
     // MODULE: qc assembly
     //
-    BUSCO (
+    BUSCO_BUSCO (
         MEDAKA.out.assembly,
         params.busco_mode,
         params.lineage, //TODO: double check that this works correctly (auto-prok)
         [],
         []
     )
-    ch_versions = ch_versions.mix(BUSCO.out.versions)
+    ch_versions = ch_versions.mix(BUSCO_BUSCO.out.versions)
 
     emit:
     versions = ch_versions

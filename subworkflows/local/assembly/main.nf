@@ -31,7 +31,7 @@ workflow ASSEMBLY {
     // MODULE: assembly ONT longreads
     //
     FLYE (
-        ch_reads.combine(ch_genome_size, by:0).view(),
+        ch_reads.combine(ch_genome_size, by:0),
         params.flye_mode
     )
     ch_versions = ch_versions.mix(FLYE.out.versions)

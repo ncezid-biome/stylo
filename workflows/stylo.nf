@@ -7,7 +7,7 @@
 // TODO: uncomment
 include { READS_PREPROCESSING    } from '../subworkflows/local/reads_preprocess'
 include { ASSEMBLY               } from '../subworkflows/local/assembly'
-// include { POSTPROCESSING_QC      } from '../subworkflows/local/postprocessing_qc'
+include { POSTPROCESSING_QC      } from '../subworkflows/local/postprocessing_qc'
 include { paramsSummaryMap       } from 'plugin/nf-validation'
 // include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -93,7 +93,7 @@ workflow STYLO {
             row -> [ row[0], row[3][0], row[1][0], row[2][0], row[4][0], row[5][0] ]
         }
     
-    ch_samplesheet_plus.view()
+    ch_samplesheet_plus
 
     // TODO:uncomment
     //
@@ -113,7 +113,6 @@ workflow STYLO {
     )
     ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
 
-    /*
     //
     // SUBWORKFLOW: postprocess and qc assembly
     //
@@ -176,7 +175,7 @@ workflow STYLO {
     //     ch_multiqc_custom_config.toList(),
     //     ch_multiqc_logo.toList()
     // )
-    */
+    
     emit:
     // multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
     // TODO: include emitted channels from subworkflows
