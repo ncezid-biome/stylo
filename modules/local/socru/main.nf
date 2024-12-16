@@ -8,8 +8,7 @@ process SOCRU {
         'https://depot.galaxyproject.org/singularity/socru%3A2.2.4--py_1'}"
 
     input:
-    tuple val(meta), path(assembly)
-    tuple val(meta), val(socru_species) // post lookup table
+    tuple val(meta), path(assembly), val(socru_species) // post lookup table
 
     output:
     tuple val(meta), path("*_output.tsv"), emit: output

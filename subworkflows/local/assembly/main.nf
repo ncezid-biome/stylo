@@ -8,7 +8,6 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-//TODO: delete nf-core version of flye
 include { FLYE } from '../../../modules/local/flye/main'
 
 /*

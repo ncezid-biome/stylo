@@ -4,7 +4,6 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-// TODO: uncomment
 include { READS_PREPROCESSING    } from '../subworkflows/local/reads_preprocess'
 include { ASSEMBLY               } from '../subworkflows/local/assembly'
 include { POSTPROCESSING_QC      } from '../subworkflows/local/postprocessing_qc'
@@ -29,9 +28,7 @@ workflow STYLO {
     ch_versions = Channel.empty()
     // ch_multiqc_files = Channel.empty()
 
-    // ch_lookup_table = Channel.fromPath( "../conf/lookup_table.tsv" )
-    // TODO: replace with relative path 
-    ch_lookup_table = Channel.fromPath( "/scicomp/home-pure/pps0/1.projects/20240118_nf-core_conversion_Justin/1.stylo/1.nf-core_rebuild/stylo/conf/lookup_table.tsv" )
+    ch_lookup_table = Channel.fromPath( "$baseDir/conf/lookup_table.tsv" )
         .splitCsv( sep: "\t" ) 
         .map { row -> [[ row[0], row[1], row[2], row[3] ]] } // genus, species, genome_size, socru_species
 
@@ -76,7 +73,6 @@ workflow STYLO {
         .filter( row -> row[0][0] == row[1][0] ) // samplesheet genus matches lookup genus
         .filter( row -> row[1][1] == '-' ) // samplesheet species doesn't match lookup species
 
-    //TODO once fully tested remove the duplicate genus and species
     ch_samplesheet_plus = ch_samplesheet_plus_gs
         // combine both conditional samplesheets in order
         .concat(ch_samplesheet_plus_g)
@@ -95,7 +91,6 @@ workflow STYLO {
     
     ch_samplesheet_plus
 
-    // TODO:uncomment
     //
     // SUBWORKFLOW: readfiltering and downsampling reads
     //
@@ -178,7 +173,6 @@ workflow STYLO {
     
     emit:
     // multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
-    // TODO: include emitted channels from subworkflows
     versions       = ch_versions                 // channel: [ path(versions.yml) ]
 }
 

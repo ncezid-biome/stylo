@@ -49,10 +49,8 @@ workflow POSTPROCESSING_QC {
     //
     // MODULE: identify the order and orientation of complete genomes
     //
-    //TODO: figure out whats getting messed up before socru is run, might have to do with mutliple seperated channels being input
     SOCRU (
-        MEDAKA.out.assembly,
-        ch_socru_species
+        MEDAKA.out.assembly.combine(ch_socru_species, by:0) // meta, assembly, socru_species
     )
     ch_versions = ch_versions.mix(SOCRU.out.versions)
 
@@ -62,7 +60,7 @@ workflow POSTPROCESSING_QC {
     BUSCO_BUSCO (
         MEDAKA.out.assembly,
         params.busco_mode,
-        params.lineage, //TODO: double check that this works correctly (auto-prok)
+        params.lineage,
         [],
         []
     )
