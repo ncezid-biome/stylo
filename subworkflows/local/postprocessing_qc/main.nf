@@ -49,10 +49,12 @@ workflow POSTPROCESSING_QC {
     //
     // MODULE: identify the order and orientation of complete genomes
     //
-    SOCRU (
-        MEDAKA.out.assembly.combine(ch_socru_species, by:0) // meta, assembly, socru_species
-    )
-    ch_versions = ch_versions.mix(SOCRU.out.versions)
+    // TODO: if genus and species don't match socru species and if genus "sp." doesn't match
+    // TODO: WARN user if socru doesn't run per row
+    // SOCRU (
+    //     MEDAKA.out.assembly.combine(ch_socru_species, by:0) // meta, assembly, socru_species
+    // )
+    // ch_versions = ch_versions.mix(SOCRU.out.versions)
 
     //
     // MODULE: qc assembly

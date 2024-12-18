@@ -33,6 +33,7 @@ workflow STYLO {
         .map { row -> [[ row[0], row[1], row[2], row[3] ]] } // genus, species, genome_size, socru_species
 
     // TODO: check for spelling errors
+    // for now just do genus because code bring skip the row entirely if genus is incorrect
     // samplesheet
     // [1,2,3,4] // genus and species flattened
     // [1,s]
@@ -63,6 +64,20 @@ workflow STYLO {
     //     for element in channel
     //         warning element might be misspelled
     // maybe a function will work better here
+    ch_samplesheet_genus_list = ch_samplesheet
+        .map { row -> row[2]}
+        .flatten()
+        .unique()
+        .map { genus -> [genus, "s"]}
+    ch_lookup_table_genus_list = ch_lookup_table
+        .map { row -> row[0][0]}
+        .flatten()
+        .unique()
+        .map { genus -> [genus, "l"]}
+    ch_samplesheet_genus_list.concat(ch_lookup_table_genus_list)
+        .groupTuple(by:0)
+        .filter{ row -> row[1] == ["s"]}
+        .subscribe { row -> log.warn "${row[0]} wasn't found in the lookup table, this could be a mispelling" }
 
 
     ch_samplesheet_reordered = ch_samplesheet.map { meta, fastq, genus, species -> [[genus, species, meta, fastq]] }
