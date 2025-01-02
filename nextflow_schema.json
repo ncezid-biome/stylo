@@ -10,10 +10,7 @@
             "type": "object",
             "fa_icon": "fas fa-terminal",
             "description": "Define where the pipeline should find input data and save output data.",
-            "required": [
-                "input",
-                "outdir"
-            ],
+            "required": ["input", "outdir"],
             "properties": {
                 "input": {
                     "type": "string",
@@ -154,14 +151,7 @@
                     "description": "Method used to save pipeline results to output directory.",
                     "help_text": "The Nextflow `publishDir` option specifies which intermediate files should be saved to the output directory. This option tells the pipeline what method should be used to move these files. See [Nextflow docs](https://www.nextflow.io/docs/latest/process.html#publishdir) for details.",
                     "fa_icon": "fas fa-copy",
-                    "enum": [
-                        "symlink",
-                        "rellink",
-                        "link",
-                        "copy",
-                        "copyNoFollow",
-                        "move"
-                    ],
+                    "enum": ["symlink", "rellink", "link", "copy", "copyNoFollow", "move"],
                     "hidden": true
                 },
                 "email_on_fail": {
@@ -268,5 +258,38 @@
         {
             "$ref": "#/definitions/generic_options"
         }
-    ]
+    ],
+    "properties": {
+        "min_read_length": {
+            "type": "integer",
+            "default": 1000,
+            "description": "Keep all reads longer than this length"
+        },
+        "nanoq_format": {
+            "type": "string",
+            "default": "fastq.gz",
+            "description": "Format of nanoq outputs. Leave as is unless different format is needed"
+        },
+        "coverage": {
+            "type": "integer",
+            "_comment": "TODO: change to 80",
+            "default": 20,
+            "description": "Coverage to downsample reads to"
+        },
+        "flye_mode": {
+            "type": "string",
+            "default": "--nano-hq",
+            "description": "Type of longreads being input, see flye github for details. Leave as is unless you have alternate ONT longread technology"
+        },
+        "flye_min_overlap": {
+            "type": "string",
+            "default": "",
+            "description": "Min overlap length for two reads to be considered overlapping during assembly. Set automatically by flye, see documentation for details"
+        },
+        "lineage": {
+            "type": "string",
+            "default": "auto",
+            "description": "Tells busco what lineage to use. See busco documentation for details"
+        }
+    }
 }
