@@ -32,38 +32,7 @@ workflow STYLO {
         .splitCsv( sep: "\t" ) 
         .map { row -> [[ row[0], row[1], row[2], row[3] ]] } // genus, species, genome_size, socru_species
 
-    // TODO: check for spelling errors
-    // for now just do genus because code bring skip the row entirely if genus is incorrect
-    // samplesheet
-    // [1,2,3,4] // genus and species flattened
-    // [1,s]
-    // [2,s]
-    // [3,s]
-    // [4,s]
-    // llookuptable
-    // [1,2,3,5] // genus and species flattened
-    // [1,l]
-    // [2,l]
-    // [3,l]
-    // [5,l]
-    // grouptuple
-    // [1,[s,l]]
-    // [2,[s,l]]
-    // [3,[s,l]]
-    // [4,[s]] // WARN
-    // [5,[l]] // no problem
-    // .filter [*,[s]]
-    // .filter ( row -> row[1] == ['s'])
-    // [4,[s]]
-    // option 1
-    //     .count()
-    //     1
-    //     if count > 0 how to do this?
-    //         warning a genus or species might be misspelled
-    // option 2
-    //     for element in channel
-    //         warning element might be misspelled
-    // maybe a function will work better here
+    // code for sanity checking spelling of genus in samplesheet
     ch_samplesheet_genus_list = ch_samplesheet
         .map { row -> row[2]}
         .flatten()
@@ -79,7 +48,19 @@ workflow STYLO {
         .filter{ row -> row[1] == ["s"]}
         .subscribe { row -> log.warn "${row[0]} wasn't found in the lookup table, this could be a mispelling" }
 
+    // code for checking socru species exists
+    // TODO: if genus and species don't match socru species and if genus "sp." doesn't match
+    // TODO: WARN user if socru doesn't run per row
+    // extract socru species (SOCRU_SPECIES module?)
+    // if <genus>_<species> in socru_species_list
+    //     add row to SOCRU run channel
+    // else if <genus>_sp. in socru_species_list
+    //     add row to SOCRU run channel
+    // else
+    //     WARN user that socru didn't run
 
+
+    // code for adding genome_size and socru_species to the samplesheet CORRECTLY
     ch_samplesheet_reordered = ch_samplesheet.map { meta, fastq, genus, species -> [[genus, species, meta, fastq]] }
     ch_samplesheet_plus_gs = ch_samplesheet_reordered.combine(ch_lookup_table)
         .filter( row -> row[0][0] == row[1][0] ) // samplesheet genus matches lookup genus
@@ -87,7 +68,6 @@ workflow STYLO {
     ch_samplesheet_plus_g = ch_samplesheet_reordered.combine(ch_lookup_table)
         .filter( row -> row[0][0] == row[1][0] ) // samplesheet genus matches lookup genus
         .filter( row -> row[1][1] == '-' ) // samplesheet species doesn't match lookup species
-
     ch_samplesheet_plus = ch_samplesheet_plus_gs
         // combine both conditional samplesheets in order
         .concat(ch_samplesheet_plus_g)
