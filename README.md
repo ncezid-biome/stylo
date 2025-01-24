@@ -19,7 +19,13 @@
 > [!NOTE]
 > If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/usage/installation) on how to set-up Nextflow.
 
-First, prepare a samplesheet with your input data that looks as follows:
+First, download this branch to your prefered directory
+```bash
+cd /path/to/dir/
+git clone -b nf-core-dev git@github.com:ncezid-narst/stylo.git
+```
+
+Second, prepare a samplesheet with your input data that looks as follows:
 
 `samplesheet.csv`:
 
@@ -38,7 +44,7 @@ Each row represents a fastq file (single-end) with the known genus and species.
 > [!NOTE]
 > you can use `-` where the species is unknown
 
-Second, look at the [lookup table](conf/lookup_table.tsv) to make sure all the genuses listed in your samplesheet are present. If you'd like to add a row or edit the lookup table see [Advanced Usage](#advanced-usage)
+Third, look at the [lookup table](conf/lookup_table.tsv) to make sure all the genuses listed in your samplesheet are present. If you'd like to add a row or edit the lookup table see [Advanced Usage](#advanced-usage)
 
 
 Now, you can run the pipeline using:
@@ -46,7 +52,7 @@ Now, you can run the pipeline using:
 <!-- TODO nf-core: update the following command to include all required parameters for a minimal example -->
 
 ```bash
-nextflow run narst/stylo \
+nextflow run /path/to/stylo/main.nf \
    -profile singularity
    --input samplesheet.csv \
    --outdir <OUTDIR>
