@@ -13,12 +13,11 @@ The directories listed below will be created in the results directory after the 
 The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes data using the following steps:
 
 - [nanoq](#nanoq) - Read filtering
-- [rasusa](#rasusa) - Read Downsampling
+- [Rasusa](#rasusa) - Read Downsampling
 - [Flye](#flye) - Assembly
 - [Circlator](#circlator) - Circularization of assembly
 - [Medaka](#medaka) - Assembly error correction
-<!-- TODO: SOCRU -->
-- [busco](#busco) - Assembly QC
+- [BUSCO](#busco) - Assembly QC
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
 
 ### nanoq
@@ -27,12 +26,12 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 <summary>Output files</summary>
 
 - `nanoq/`
-  - `*_filtered.fastq.gz`: Filtered reads
+  - `*_filtered.fastq.gz`: filtered reads
   - `*_filtered.stats`: basic stats summary for filtered reads
 
 </details>
 
-For further reading and documentation see [nanoq usage](https://github.com/esteinig/nanoq?tab=readme-ov-file#usage).
+Ultra-fast quality control and summary reports for nanopore reads. For further reading and documentation see [nanoq usage](https://github.com/esteinig/nanoq?tab=readme-ov-file#usage).
 
 ### rasusa
 
@@ -44,7 +43,7 @@ For further reading and documentation see [nanoq usage](https://github.com/estei
 
 </details>
 
-For further reading and documentation see [rasusa usage](https://github.com/mbhall88/rasusa?tab=readme-ov-file#usage).
+Randomly subsample sequencing reads to a specified coverage. For further reading and documentation see [rasusa usage](https://github.com/mbhall88/rasusa?tab=readme-ov-file#usage).
 
 ### Flye
 
@@ -52,16 +51,16 @@ For further reading and documentation see [rasusa usage](https://github.com/mbha
 <summary>Output files</summary>
 
 - `flye/`
-  - `*.assembly.fasta.gz` : Final assembly
-  - `*.assembly_graph.gfa.gz` : Final repeat graph in gfa format
-  - `*.assembly_graph.gv.gz` : Final repeat graph in gv format
+  - `*.assembly.fasta.gz` : final assembly
+  - `*.assembly_graph.gfa.gz` : final repeat graph in gfa format
+  - `*.assembly_graph.gv.gz` : final repeat graph in gv format
   - `*.assembly_info.txt` : basic info about assembly
   - `*.flye.log` : full log for flye run
   - `*.params.json`: input parameters used for flye
 
 </details>
 
-For further reading and documentation see the [Flye usage page](https://github.com/mikolmogorov/Flye/blob/flye/docs/USAGE.md).
+Fast and accurate de novo assembler for single molecule sequencing reads. For further reading and documentation see the [Flye usage page](https://github.com/mikolmogorov/Flye/blob/flye/docs/USAGE.md).
 
 ### Circlator
 
@@ -85,11 +84,7 @@ For further reading and documentation see [circlator usage](https://github.com/s
 
 </details>
 
-For further reading and documentation see [medaka usage](https://github.com/nanoporetech/medaka?tab=readme-ov-file#usage).
-
-<!-- TODO: SOCRU -->
-
-
+Neural network sequence error correction. For further reading and documentation see [medaka usage](https://github.com/nanoporetech/medaka?tab=readme-ov-file#usage).
 
 ### busco
 
@@ -104,32 +99,9 @@ For further reading and documentation see [medaka usage](https://github.com/nano
 
 </details>
 
-For further reading and documentation see the [busco github](https://github.com/metashot/busco).
+BUSCO provides measures for quantitative assessment of genome assembly, gene set, and transcriptome completeness based on evolutionarily informed expectations of gene content from near-universal single-copy orthologs selected from OrthoDB. For further reading and documentation see the [busco github](https://github.com/metashot/busco).
 
 <!-- EXAMPLE
-### FastQC
-
-<details markdown="1">
-<summary>Output files</summary>
-
-- `fastqc/`
-  - `*_fastqc.html`: FastQC report containing quality metrics.
-  - `*_fastqc.zip`: Zip archive containing the FastQC report, tab-delimited data file and plot images.
-
-</details>
-
-[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads. It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences. For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
-
-![MultiQC - FastQC sequence counts plot](images/mqc_fastqc_counts.png)
-
-![MultiQC - FastQC mean quality scores plot](images/mqc_fastqc_quality.png)
-
-![MultiQC - FastQC adapter content plot](images/mqc_fastqc_adapter.png)
-
-:::note
-The FastQC plots displayed in the MultiQC report shows _untrimmed_ reads. They may contain adapter sequence and potentially regions with low quality.
-:::
-
 ### MultiQC
 
 <details markdown="1">

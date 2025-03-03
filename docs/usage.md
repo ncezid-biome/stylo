@@ -6,6 +6,7 @@
 
 <!-- TODO nf-core: Add documentation about anything specific to running your pipeline. For general topics, please point to (and add to) the main nf-core website. -->
 
+
 ## Samplesheet input
 
 You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 4 columns, and a header row as shown in the examples below.
@@ -34,7 +35,7 @@ sample5,/path/to/sample5.fastq.gz,Salmonella,enterica
 | `sample`  | Custom sample name. This entry must be unique. |
 | `fastq` | Full path to FastQ file for ONT longreads. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
 | `genus` | genus of the sample. This must be provided for the pipeline to run, otherwise the row will be skipped. |
-| `species` | species of the sample. If you don't know the species or would like to skip this part use `-` as seen in the example samplesheet. Note that this might effect some assemblies such as Vibrio where different species within the genus have different genome sizes |
+| `species` | species of the sample. If you don't know the species or would like to skip this part use `-` as seen in the example samplesheet. Note that this might affect some assemblies such as Vibrio where different species within the genus have different genome sizes |
 
 An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
 
@@ -107,7 +108,7 @@ If `-profile` is not specified, the pipeline will run locally and expect all sof
 - `singularity`
   - A generic configuration profile to be used with [Singularity](https://sylabs.io/docs/)
 - `rosalind`
-  - A CDC server specific configuration profile for running jobs of the cluster using [Singularity](https://sylabs.io/docs/)
+  - A CDC server specific configuration profile for running jobs on the cluster using [Singularity](https://sylabs.io/docs/)
 
 ### `-resume`
 
@@ -146,7 +147,7 @@ Nextflow handles job submissions and supervises the running jobs. The Nextflow p
 The Nextflow `-bg` flag launches Nextflow in the background, detached from your terminal so that the workflow does not stop if you log out of your session. The logs are saved to a file.
 
 Alternatively, you can use `screen` / `tmux` or similar tool to create a detached session which you can log back into at a later time.
-Some HPC setups also allow you to run nextflow within a cluster job submitted your job scheduler (from where it submits more jobs).
+Some HPC setups also allow you to run nextflow within a cluster job submitted by your job scheduler (from where it submits more jobs).
 
 ## Nextflow memory requirements
 

@@ -11,25 +11,29 @@
 3. Assembles reads ([Flye](https://github.com/mikolmogorov/Flye))
 4. Circularizes assembly ([Circlator](https://github.com/sanger-pathogens/circlator))
 5. Error correction ([Medaka](https://github.com/nanoporetech/medaka))
-<!-- TODO: SOCRU -->
-7. QCs assembly ([busco](https://github.com/metashot/busco))
+6. QCs assembly ([busco](https://github.com/metashot/busco))
 
 ## Usage
 
 > [!NOTE]
 > If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/usage/installation) on how to set-up Nextflow.
 
+> [!NOTE]
+> This pipeline was tested using the following, other versions may work but are currently untested
+> nf-core v2.14.1
+> nextflow v24.04.2
+> singularity v3.8.7
+
 First, download this branch to your prefered directory
 ```bash
 cd /path/to/dir/
-git clone -b nf-core-dev git@github.com:ncezid-narst/stylo.git
+git clone -b nf-core-dev git@github.com:arzoopatel5/stylo.git
 ```
 
 Second, prepare a samplesheet with your input data that looks as follows:
 
 `samplesheet.csv`:
 
-<!-- TODO: remove socru? -->
 ```csv
 sample,fastq,genus,species
 sample1,/path/to/sample1.fastq.gz,Salmonella,enterica
@@ -49,8 +53,6 @@ Third, look at the [lookup table](conf/lookup_table.tsv) to make sure all the ge
 
 Now, you can run the pipeline using:
 
-<!-- TODO nf-core: update the following command to include all required parameters for a minimal example -->
-
 ```bash
 nextflow run /path/to/stylo/main.nf \
    -profile singularity
@@ -69,7 +71,7 @@ For more details about generic usage see the [Usage Page](docs/usage.md)
 
 ## Advanced Usage
 
-### Editting the Lookup Table
+### Editing the Lookup Table
 If a genus is missing, then you'll need to add a row to the lookup table prior to running the pipeline. In order to add a row to the lookup table you'll need the following information:
 
 1. genus (required)
@@ -101,6 +103,7 @@ narst/stylo was originally written by Arzoo Patel, Mohit Thakur.
 We thank the following people for their extensive assistance in the development of this pipeline:
 
 <!-- TODO nf-core: If applicable, make list of people who have also contributed -->
+Justin Kim, Jessica Chen, Peyton Smith, Lee Katz, Joe Wirth, 
 
 ## Contributions and Support
 
