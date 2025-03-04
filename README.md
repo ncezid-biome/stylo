@@ -1,6 +1,6 @@
 ## Introduction
 
-**narst/stylo** is a bioinformatics pipeline that can be used to filter, downsample, assmeble, and QC ['ONT'](https://nanoporetech.com/) longreads. It takes a samplesheet and FASTQ files as input, performs read filtering, downsampling to specified coverage, assembly, and Quality Control (QC).
+**narst/stylo** is a bioinformatics pipeline that can be used to filter, downsample, assmeble, and QC [ONT](https://nanoporetech.com/) longreads. It takes a samplesheet and FASTQ files as input, performs read filtering, downsampling to specified coverage, assembly, and Quality Control (QC).
 
 <!-- TODO nf-core: Include a figure that guides the user through the major workflow steps. Many nf-core
      workflows use the "tube map" design for that. See https://nf-co.re/docs/contributing/design_guidelines#examples for examples.   -->
@@ -20,8 +20,11 @@
 
 > [!NOTE]
 > This pipeline was tested using the following, other versions may work but are currently untested
+> 
 > nf-core v2.14.1
+> 
 > nextflow v24.04.2
+> 
 > singularity v3.8.7
 
 First, download this branch to your prefered directory
@@ -103,7 +106,7 @@ narst/stylo was originally written by Arzoo Patel, Mohit Thakur.
 We thank the following people for their extensive assistance in the development of this pipeline:
 
 <!-- TODO nf-core: If applicable, make list of people who have also contributed -->
-Justin Kim, Jessica Chen, Peyton Smith, Lee Katz, Joe Wirth, 
+Justin Kim, Jessica Chen, Peyton Smith, Lee Katz, Joe Wirth, Curtis Kapsak
 
 ## Contributions and Support
 

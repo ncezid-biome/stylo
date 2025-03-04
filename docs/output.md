@@ -33,7 +33,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 Ultra-fast quality control and summary reports for nanopore reads. For further reading and documentation see [nanoq usage](https://github.com/esteinig/nanoq?tab=readme-ov-file#usage).
 
-### rasusa
+### Rasusa
 
 <details markdown="1">
 <summary>Output files</summary>
@@ -86,7 +86,7 @@ For further reading and documentation see [circlator usage](https://github.com/s
 
 Neural network sequence error correction. For further reading and documentation see [medaka usage](https://github.com/nanoporetech/medaka?tab=readme-ov-file#usage).
 
-### busco
+### BUSCO
 
 <details markdown="1">
 <summary>Output files</summary>
