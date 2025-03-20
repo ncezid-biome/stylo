@@ -40,7 +40,7 @@
 
 - [BUSCO](https://www.nature.com/articles/nbt.3820)
 
-  > Di Tommaso, P., Chatzou, M., Floden, E. et al. Nextflow enables reproducible computational workflows. Nat Biotechnol 35, 316–319 (2017). https://doi.org/10.1038/nbt.3820
+  > BUSCO. Github. (2021). https://github.com/metashot/busco
 
 ## Software packaging/containerisation tools
 
