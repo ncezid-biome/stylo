@@ -24,23 +24,18 @@ authors:
     affiliation: 1 
   - name: Justin Kim 
     orcid: TODO 
-    corresponding: true 
     affiliation: 1 
   - name: Peyton Smith 
     orcid: TODO 
-    corresponding: true 
     affiliation: 1 
   - name: Lee Katz 
     orcid: TODO 
-    corresponding: true 
     affiliation: 1 
   - name: Curtis Kapsak 
     orcid: TODO 
-    corresponding: true 
     affiliation: 1
   - name: Jessica Chen 
     orcid: TODO 
-    corresponding: true 
     affiliation: 1 
 affiliations: 
  - name: Enteric Diseases Laboratory Branch, Division of Foodborne, Waterborne, and Environmental Diseases, National Center for Emerging and Zoonotic Infectious Diseases, Centers for Disease Control and Prevention, Atlanta, Georgia 
@@ -71,7 +66,7 @@ Stylo is optimized around PulseNet, a molecular surveillance network for foodbor
 
 5. Output: The pipeline outputs files for each step. Some keys files are the initial assembly by Flye, the final assembly by Medaka, and the Quality Control summary by BUSCO 
 
-![Diagram of stylo steps.](stylo_tubemap.png)
+![Diagram of stylo steps.](assets/stylo_tubemap.png)
 
 # Availability
 

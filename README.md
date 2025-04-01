@@ -2,9 +2,7 @@
 
 **narst/stylo** is a bioinformatics pipeline that can be used to filter, downsample, assmeble, and QC [ONT](https://nanoporetech.com/) longreads. It takes a samplesheet and FASTQ files as input, performs read filtering, downsampling to specified coverage, assembly, and Quality Control (QC).
 
-<!-- TODO nf-core: Include a figure that guides the user through the major workflow steps. Many nf-core
-     workflows use the "tube map" design for that. See https://nf-co.re/docs/contributing/design_guidelines#examples for examples.   -->
-<!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->
+![Diagram of stylo steps](assets/stylo_tubemap.png)
 
 1. Filters low quality reads ([nanoq](https://github.com/esteinig/nanoq))
 2. Downsamples reads to specific coverage ([rasusa](https://github.com/mbhall88/rasusa))
@@ -80,24 +78,6 @@ If a genus is missing, then you'll need to add a row to the lookup table prior t
 1. genus (required)
 2. species (optional, use `-` if you want the lookup table to accept all species within that genus)
 3. genomes size (required, must follow the same format as the other rows in MBs)
-4. socru_species (optional, must be a valid socru_species database or `-` if you prefer not to run socru, see [here](#socru-species-database-lookup)) <!-- TODO: remove socru? -->
-
-<!-- TODO: remove socru? -->
-
-### Socru Species Database Lookup
-> [!NOTE] 
-> You'll need to be able to run [Singularity](https://docs.sylabs.io/guides/latest/user-guide/) for this part
-
-In order to get the socru_species list run the following
-
-```bash
-wget https://depot.galaxyproject.org/singularity/socru%3A2.2.4--py_1
-singularity run socru%3A2.2.4--py_1 socru_species
-```
-
-If you cannot find your species in this list, then look for the genus with the ending `_sp.`. If `socru_species` doesn't contain your genus then you'll need to skip socru by using `-` in the lookup table.
-
-<!-- TODO: remove socru? -->
 
 ## Credits
 
@@ -105,7 +85,6 @@ narst/stylo was originally written by Arzoo Patel, Mohit Thakur.
 
 We thank the following people for their extensive assistance in the development of this pipeline:
 
-<!-- TODO nf-core: If applicable, make list of people who have also contributed -->
 Justin Kim, Jessica Chen, Peyton Smith, Lee Katz, Joe Wirth, Curtis Kapsak
 
 ## Contributions and Support
