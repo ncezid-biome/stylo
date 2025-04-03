@@ -46,13 +46,13 @@ bibliography: paper.bib
 
 # Summary
 
-Oxford Nanopore Technologies (ONT) sequencing is a promising technology with many potential applications in food safety. We have developed stylo, a lightweight nf-core style assembly workflow for ONT long reads, specifically optimized for enteric bacteria. The pipeline downsamples, assembles, and performs quality control by combining nanoq, Rasusa, Flye, Circlator, Medaka[@medaka], and BUSCO.  All of stylo’s dependencies are containerized and the pipeline is available on GitHub. 
+Oxford Nanopore Technologies (ONT) sequencing is a promising technology with many potential applications in food safety. We have developed stylo, a lightweight nf-core style assembly workflow for ONT long reads, specifically optimized for enteric bacteria. The pipeline downsamples, assembles, and performs quality control by combining nanoq [@Steinig2022], Rasusa[@Hall2022], Flye[@Kolmogorov2019], Circlator[@Hunt2015], Medaka[@medaka], and BUSCO[@Seppey2019].  All of stylo’s dependencies are containerized and the pipeline is available on GitHub. 
 
 # Statement of Need
 
-There is a continuous need for foodborne outbreak detection in public health (PN citation). To determine the scope or severity of a foodborne outbreak, isolate assemblies are often used to characterize enteric bacteria (PN citation). As nanopore longreads becomes more cost effective and accurate (both citations?) there is an increased need for streamlined pipelines for processing potential outbreaks sequenced using Oxford Nanopore Technologies (ONT).  With the increased adoption modern High-performance computing (HPC) and cloud servers, pipelines built to leverage containerization and custom configurations allow for easy deployment on those servers. To address these needs, we have created stylo, a lightweight nf-core style nanopore assembly pipeline optimized for enteric bacteria.  
+There is a continuous need for foodborne outbreak detection in public health. To determine the scope or severity of a foodborne outbreak, isolate assemblies are often used to characterize enteric bacteria [@Ribot2016-ps][@Timme2017-gl]. As nanopore longreads becomes more cost effective and accurate, there is an increased need for streamlined pipelines for processing potential outbreaks sequenced using Oxford Nanopore Technologies (ONT) [@mbs:/content/journal/mgen/10.1099/mgen.0.001246][@doi:10.1128/jcm.00246-24]. With the increased adoption modern High-performance computing (HPC) and cloud servers, pipelines built to leverage containerization and custom configurations allow for easy deployment on those servers. To address these needs, we have created stylo, a lightweight nf-core[@Di-Tommaso2017][@Ewels2020] style nanopore assembly pipeline optimized for enteric bacteria.  
 
-Stylo is optimized around PulseNet, a molecular surveillance network for foodborne infections in the United States (PN citation). PN facilitates the rapid detection of illness clusters and reduces the likelihood of outbreaks becoming large and widespread (PN citation 2023). There exist generalized nanopore assembly workflows such as Donut falls(citation), whereas stylo is a specialized workflow utilized by PN and for downstream genotyping.  
+Stylo is optimized around PulseNet, a molecular surveillance network for foodborne infections in the United States[@doi:10.1089/fpd.2006.3.9]. PulseNet facilitates the rapid detection of illness clusters and reduces the likelihood of outbreaks becoming large and widespread[@doi:10.1089/fpd.2019.2637]. There exist generalized nanopore assembly workflows such as Donut falls[@DonutFalls2025], whereas stylo is a specialized workflow utilized by PN and for downstream genotyping.  
 
 # Workflow Overview
 
@@ -70,7 +70,7 @@ Stylo is optimized around PulseNet, a molecular surveillance network for foodbor
 
 # Availability
 
-Stylo is freely available and open-source. It can be downloaded from the GitHub repository available at https://github.com/arzoopatel5/stylo.  
+Stylo is freely available and open-source. It can be downloaded from the GitHub repository available at [https://github.com/arzoopatel5/stylo](https://github.com/arzoopatel5/stylo).
 
 # Acknowledgements
 
