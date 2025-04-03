@@ -46,7 +46,7 @@ bibliography: paper.bib
 
 # Summary
 
-Oxford Nanopore Technologies (ONT) sequencing is a promising technology with many potential applications in food safety. We have developed stylo, a lightweight nf-core style assembly workflow for ONT long reads, specifically optimized for enteric bacteria. The pipeline downsamples, assembles, and performs quality control by combining nanoq [@Steinig2022], Rasusa[@Hall2022], Flye[@Kolmogorov2019], Circlator[@Hunt2015], Medaka[@medaka], and BUSCO[@Seppey2019].  All of stylo’s dependencies are containerized and the pipeline is available on GitHub. 
+Oxford Nanopore Technologies (ONT) sequencing is a promising technology with many potential applications in food safety. We have developed stylo, a lightweight nf-core style assembly workflow for ONT long reads, specifically optimized for enteric bacteria. The pipeline downsamples, assembles, and performs quality control by combining nanoq[@Steinig2022], Rasusa[@Hall2022], Flye[@Kolmogorov2019], Circlator[@Hunt2015], Medaka[@medaka], and BUSCO[@Seppey2019].  All of stylo’s dependencies are containerized and the pipeline is available on GitHub. 
 
 # Statement of Need
 
@@ -66,7 +66,7 @@ Stylo is optimized around PulseNet, a molecular surveillance network for foodbor
 
 5. Output: The pipeline outputs files for each step. Some keys files are the initial assembly by Flye, the final assembly by Medaka, and the Quality Control summary by BUSCO 
 
-![Diagram of stylo steps.](assets/stylo_tubemap.png)
+![Diagram of stylo steps.](/github/workspace/assets/stylo_tubemap.png)
 
 # Availability
 
