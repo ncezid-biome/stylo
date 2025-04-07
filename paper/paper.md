@@ -33,15 +33,17 @@ authors:
     affiliation: 1 
   - name: Curtis Kapsak 
     orcid: 0000-0002-8735-1190
-    affiliation: 1
+    affiliation: "1,3"
   - name: Jessica Chen 
     orcid: 0000-0002-9320-6774
     affiliation: 1
 affiliations: 
  - name: Enteric Diseases Laboratory Branch, Division of Foodborne, Waterborne, and Environmental Diseases, National Center for Emerging and Zoonotic Infectious Diseases, Centers for Disease Control and Prevention, Atlanta, Georgia 
    index: 1
- - name: ASRT TODO
+ - name: ASRT, Inc, Suwanee, Georgia
    index: 2
+ - name: Theiagen Genomics, Highlands Ranch, Colorado
+   index: 3
 date: 31 March 2025 
 bibliography: paper.bib 
 ---
