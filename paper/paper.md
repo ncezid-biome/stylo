@@ -17,29 +17,31 @@ authors:
   - name: Arzoo Patel 
     orcid: 0009-0007-9033-5785 
     equal-contrib: true 
-    affiliation: 1 
+    affiliation: "1,2" 
   - name: Mohit Thakur 
-    orcid: TODO 
+    orcid: 0009-0003-2927-6051
     equal-contrib: true 
     affiliation: 1 
   - name: Justin Kim 
-    orcid: TODO 
-    affiliation: 1 
+    orcid: 0000-0001-8745-9612
+    affiliation: "1,2"
   - name: Peyton Smith 
-    orcid: TODO 
+    orcid: 0000-0002-5446-5298
     affiliation: 1 
-  - name: Lee Katz 
-    orcid: TODO 
+  - name: Lee Katz
+    orcid: 0000-0002-2533-9161
     affiliation: 1 
   - name: Curtis Kapsak 
-    orcid: TODO 
+    orcid: 0000-0002-8735-1190
     affiliation: 1
   - name: Jessica Chen 
-    orcid: TODO 
-    affiliation: 1 
+    orcid: 0000-0002-9320-6774
+    affiliation: 1
 affiliations: 
  - name: Enteric Diseases Laboratory Branch, Division of Foodborne, Waterborne, and Environmental Diseases, National Center for Emerging and Zoonotic Infectious Diseases, Centers for Disease Control and Prevention, Atlanta, Georgia 
-   index: 1 
+   index: 1
+ - name: ASRT TODO
+   index: 2
 date: 31 March 2025 
 bibliography: paper.bib 
 ---
