@@ -18,6 +18,30 @@
 
   > Ewels P, Magnusson M, Lundin S, Käller M. MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics. 2016 Oct 1;32(19):3047-8. doi: 10.1093/bioinformatics/btw354. Epub 2016 Jun 16. PubMed PMID: 27312411; PubMed Central PMCID: PMC5039924.
 
+- [nanoq](https://joss.theoj.org/papers/10.21105/joss.02991)
+
+  > Steinig et al., (2022). Nanoq: ultra-fast quality control for nanopore reads. Journal of Open Source Software, 7(69), 2991, https://doi.org/10.21105/joss.02991
+
+- [Rasusa](https://joss.theoj.org/papers/10.21105/joss.03941)
+
+  > Hall, M. B., (2022). Rasusa: Randomly subsample sequencing reads to a specified coverage. Journal of Open Source Software, 7(69), 3941, https://doi.org/10.21105/joss.03941
+
+- [Flye](https://www.nature.com/articles/s41587-019-0072-8)
+
+  > Kolmogorov, M., Yuan, J., Lin, Y. et al. Assembly of long, error-prone reads using repeat graphs. Nat Biotechnol 37, 540–546 (2019). https://doi.org/10.1038/s41587-019-0072-8
+
+- [Circlator](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0849-0)
+
+  > Hunt, M., Silva, N.D., Otto, T.D. et al. Circlator: automated circularization of genome assemblies using long sequencing reads. Genome Biol 16, 294 (2015). https://doi.org/10.1186/s13059-015-0849-0
+
+- [Medaka](https://github.com/nanoporetech/medaka)
+
+  > Medaka. Github. (2024). https://github.com/nanoporetech/medaka
+
+- [BUSCO](https://www.nature.com/articles/nbt.3820)
+
+  > BUSCO. Github. (2021). https://github.com/metashot/busco
+
 ## Software packaging/containerisation tools
 
 - [Anaconda](https://anaconda.com)

@@ -30,7 +30,7 @@ workflow STYLO {
 
     ch_lookup_table = Channel.fromPath( "$baseDir/conf/lookup_table.tsv" )
         .splitCsv( sep: "\t" ) 
-        .map { row -> [[ row[0], row[1], row[2], row[3] ]] } // genus, species, genome_size, socru_species
+        .map { row -> [[ row[0], row[1], row[2] ]] } // genus, species, genome_size
 
     // code for sanity checking spelling of genus in samplesheet
     ch_samplesheet_genus_list = ch_samplesheet
@@ -48,19 +48,7 @@ workflow STYLO {
         .filter{ row -> row[1] == ["s"]}
         .subscribe { row -> log.warn "${row[0]} wasn't found in the lookup table, this could be a mispelling" }
 
-    // code for checking socru species exists
-    // TODO: if genus and species don't match socru species and if genus "sp." doesn't match
-    // TODO: WARN user if socru doesn't run per row
-    // extract socru species (SOCRU_SPECIES module?)
-    // if <genus>_<species> in socru_species_list
-    //     add row to SOCRU run channel
-    // else if <genus>_sp. in socru_species_list
-    //     add row to SOCRU run channel
-    // else
-    //     WARN user that socru didn't run
-
-
-    // code for adding genome_size and socru_species to the samplesheet CORRECTLY
+    // code for adding genome_size to the samplesheet CORRECTLY
     ch_samplesheet_reordered = ch_samplesheet.map { meta, fastq, genus, species -> [[genus, species, meta, fastq]] }
     ch_samplesheet_plus_gs = ch_samplesheet_reordered.combine(ch_lookup_table)
         .filter( row -> row[0][0] == row[1][0] ) // samplesheet genus matches lookup genus
@@ -72,16 +60,16 @@ workflow STYLO {
         // combine both conditional samplesheets in order
         .concat(ch_samplesheet_plus_g)
         // remap to remove extra []
-        // meta, genus, species, fasta, genome_size, socru_species
+        // meta, genus, species, fasta, genome_size
         .map {
-            row -> [row[0][2], row[0][0], row[0][1], row[0][3], row[1][2], row[1][3]]
+            row -> [row[0][2], row[0][0], row[0][1], row[0][3], row[1][2]]
         }
         // group by meta id
         .groupTuple(by:0)
         // take first element of each group
-        // meta, fasta, genus, species, genome_size, socru_species
+        // meta, fasta, genus, species, genome_size
         .map {
-            row -> [ row[0], row[3][0], row[1][0], row[2][0], row[4][0], row[5][0] ]
+            row -> [ row[0], row[3][0], row[1][0], row[2][0], row[4][0] ]
         }
     
     ch_samplesheet_plus
@@ -99,7 +87,7 @@ workflow STYLO {
     //
     ASSEMBLY (
         READS_PREPROCESSING.out.reads,
-        ch_samplesheet_plus.map { meta, fasta, genus, species, genome_size, socru_species -> [meta, genome_size] }
+        ch_samplesheet_plus.map { meta, fasta, genus, species, genome_size -> [meta, genome_size] }
     )
     ch_versions = ch_versions.mix(ASSEMBLY.out.versions)
 
@@ -107,12 +95,10 @@ workflow STYLO {
     // SUBWORKFLOW: postprocess and qc assembly
     //
     // takes reads from preprocessing not original reads READS_PREPROCESSING.out.reads
-    ch_socru_species = ch_samplesheet_plus.map { meta, reads, genus, species, genome_size, socru_species -> tuple (meta, socru_species) }
 
     POSTPROCESSING_QC (
         ASSEMBLY.out.assembly,
         READS_PREPROCESSING.out.reads,
-        ch_socru_species
     )
     ch_versions = ch_versions.mix(POSTPROCESSING_QC.out.versions)
 

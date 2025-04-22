@@ -10,7 +10,6 @@
 
 include { CIRCLATOR_FIXSTART } from '../../../modules/local/circlator/fixstart/main'
 include { MEDAKA             } from '../../../modules/local/medaka/main'
-include { SOCRU              } from '../../../modules/local/socru/main'
 include { BUSCO_BUSCO        } from '../../../modules/nf-core/busco/busco/main'
 
 /*
@@ -24,7 +23,6 @@ workflow POSTPROCESSING_QC {
     take:
     ch_assembly // meta, assembly
     ch_processed_reads // meta, processed_reads
-    ch_socru_species // meta, socru_species
     
     main:
 
@@ -45,15 +43,6 @@ workflow POSTPROCESSING_QC {
         ch_processed_reads.combine(CIRCLATOR_FIXSTART.out.assembly, by:0)
     )
     ch_versions = ch_versions.mix(MEDAKA.out.versions)
-
-    //
-    // MODULE: identify the order and orientation of complete genomes
-    //
-
-    // SOCRU (
-    //     MEDAKA.out.assembly.combine(ch_socru_species, by:0) // meta, assembly, socru_species
-    // )
-    // ch_versions = ch_versions.mix(SOCRU.out.versions)
 
     //
     // MODULE: qc assembly
