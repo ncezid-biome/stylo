@@ -30,9 +30,9 @@
 
   > Kolmogorov, M., Yuan, J., Lin, Y. et al. Assembly of long, error-prone reads using repeat graphs. Nat Biotechnol 37, 540–546 (2019). https://doi.org/10.1038/s41587-019-0072-8
 
-- [Circlator](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0849-0)
+- [Dnaapler](https://joss.theoj.org/papers/10.21105/joss.05968)
 
-  > Hunt, M., Silva, N.D., Otto, T.D. et al. Circlator: automated circularization of genome assemblies using long sequencing reads. Genome Biol 16, 294 (2015). https://doi.org/10.1186/s13059-015-0849-0
+  > George Bouras, Susanna R. Grigson, Bhavya Papudeshi, Vijini Mallawaarachchi, Michael J. Roach (2024). Dnaapler: A tool to reorient circular microbial genomes. Journal of Open Source Software, 9(93), 5968, https://doi.org/10.21105/joss.05968
 
 - [Medaka](https://github.com/nanoporetech/medaka)
 
