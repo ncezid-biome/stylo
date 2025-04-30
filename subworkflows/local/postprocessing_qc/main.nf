@@ -8,7 +8,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { CIRCLATOR_FIXSTART } from '../../../modules/local/circlator/fixstart/main'
+include { DNAAPLER           } from '../../../modules/local/dnaapler/main'
 include { MEDAKA             } from '../../../modules/local/medaka/main'
 include { BUSCO_BUSCO        } from '../../../modules/nf-core/busco/busco/main'
 
@@ -29,18 +29,18 @@ workflow POSTPROCESSING_QC {
     ch_versions = Channel.empty()
 
     //
-    // MODULE: circularize genome assemblies
+    // MODULE: fix starting position of genome assemblies
     //
-    CIRCLATOR_FIXSTART (
+    DNAAPLER (
         ch_assembly
     )
-    ch_versions = ch_versions.mix(CIRCLATOR_FIXSTART.out.versions)
+    ch_versions = ch_versions.mix(DNAAPLER.out.versions)
 
     //
     // MODULE: create consensus sequences
     //
     MEDAKA (
-        ch_processed_reads.combine(CIRCLATOR_FIXSTART.out.assembly, by:0)
+        ch_processed_reads.combine(DNAAPLER.out.assembly, by:0)
     )
     ch_versions = ch_versions.mix(MEDAKA.out.versions)
 

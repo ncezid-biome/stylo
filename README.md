@@ -1,13 +1,13 @@
 ## Introduction
 
-**narst/stylo** is a bioinformatics pipeline that can be used to filter, downsample, assmeble, and QC [ONT](https://nanoporetech.com/) longreads. It takes a samplesheet and FASTQ files as input, performs read filtering, downsampling to specified coverage, assembly, and Quality Control (QC).
+**narst/stylo** is a bioinformatics pipeline that can be used to filter, downsample, assemble, and QC [ONT](https://nanoporetech.com/) longreads. It takes a samplesheet and FASTQ files as input, performs read filtering, downsampling to specified coverage, assembly, and Quality Control (QC).
 
 ![Diagram of stylo steps](assets/stylo_tubemap.png)
 
 1. Filters low quality reads ([nanoq](https://github.com/esteinig/nanoq))
 2. Downsamples reads to specific coverage ([rasusa](https://github.com/mbhall88/rasusa))
 3. Assembles reads ([Flye](https://github.com/mikolmogorov/Flye))
-4. Circularizes assembly ([Circlator](https://github.com/sanger-pathogens/circlator))
+4. Reorients assembly ([Dnaapler](https://github.com/gbouras13/dnaapler))
 5. Error correction ([Medaka](https://github.com/nanoporetech/medaka))
 6. QCs assembly ([busco](https://github.com/metashot/busco))
 
@@ -25,7 +25,7 @@
 > 
 > singularity v3.8.7
 
-First, download this branch to your prefered directory
+First, download this branch to your preferred directory
 ```bash
 cd /path/to/dir/
 git clone -b nf-core-dev git@github.com:arzoopatel5/stylo.git
@@ -49,7 +49,7 @@ Each row represents a fastq file (single-end) with the known genus and species.
 > [!NOTE]
 > you can use `-` where the species is unknown
 
-Third, look at the [lookup table](conf/lookup_table.tsv) to make sure all the genuses listed in your samplesheet are present. If you'd like to add a row or edit the lookup table see [Advanced Usage](#advanced-usage)
+Third, look at the [lookup table](conf/lookup_table.tsv) to make sure that each genus listed in your samplesheet is present. If you'd like to add a row or edit the lookup table see [Advanced Usage](#advanced-usage)
 
 
 Now, you can run the pipeline using:

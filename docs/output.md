@@ -13,7 +13,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - [nanoq](#nanoq) - Read filtering
 - [Rasusa](#rasusa) - Read Downsampling
 - [Flye](#flye) - Assembly
-- [Circlator](#circlator) - Circularization of assembly
+- [Dnaapler](#dnaapler) - Reorientation of contigs
 - [Medaka](#medaka) - Assembly error correction
 - [BUSCO](#busco) - Assembly QC
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
@@ -60,17 +60,20 @@ Randomly subsample sequencing reads to a specified coverage. For further reading
 
 Fast and accurate de novo assembler for single molecule sequencing reads. For further reading and documentation see the [Flye usage page](https://github.com/mikolmogorov/Flye/blob/flye/docs/USAGE.md).
 
-### Circlator
+### Dnaapler
 
 <details markdown="1">
 <summary>Output files</summary>
 
-- `circlator_fixstart/`
-  - `*.fasta`: circularized assembly
+- `dnaapler/`
+  - `*reoriented.fasta`: reoriented assembly
+  - `*MMseqs2_output.txt`: MMseqs output
+  - `*all_reorientation_summary.tsv`: reorientation summery
+  - `*.log`: log
 
 </details>
 
-For further reading and documentation see [circlator usage](https://github.com/sanger-pathogens/circlator?tab=readme-ov-file#usage).
+For further reading and documentation see [dnaapler usage](https://github.com/gbouras13/dnaapler?tab=readme-ov-file#usage).
 
 ### Medaka
 
