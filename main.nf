@@ -28,7 +28,7 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_styl
 //
 // WORKFLOW: Run main analysis pipeline depending on type of input
 //
-workflow NARST_STYLO {
+workflow NCEZID_BIOME_STYLO {
 
     take:
     samplesheet // channel: samplesheet read in from --input
@@ -73,7 +73,7 @@ workflow {
     //
     // WORKFLOW: Run main workflow
     //
-    NARST_STYLO (
+    NCEZID_BIOME_STYLO (
         PIPELINE_INITIALISATION.out.samplesheet
     )
 
@@ -88,7 +88,7 @@ workflow {
         params.monochrome_logs,
         params.hook_url,
         []
-        // NARST_STYLO.out.multiqc_report
+        // NCEZID_BIOME_STYLO.out.multiqc_report
     )
 }
 
