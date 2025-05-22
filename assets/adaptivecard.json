@@ -17,7 +17,7 @@
                         "size": "Large",
                         "weight": "Bolder",
                         "color": "<% if (success) { %>Good<% } else { %>Attention<%} %>",
-                        "text": "narst/stylo v${version} - ${runName}",
+                        "text": "ncezid-biome/stylo v${version} - ${runName}",
                         "wrap": true
                     },
                     {

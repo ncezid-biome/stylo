@@ -1,6 +1,6 @@
 ## Introduction
 
-**narst/stylo** is a bioinformatics pipeline that can be used to filter, downsample, assemble, and QC [ONT](https://nanoporetech.com/) longreads. It takes a samplesheet and FASTQ files as input, performs read filtering, downsampling to specified coverage, assembly, and Quality Control (QC).
+**ncezid-biome/stylo** is a bioinformatics pipeline that can be used to filter, downsample, assemble, and QC [ONT](https://nanoporetech.com/) longreads. It takes a samplesheet and FASTQ files as input, performs read filtering, downsampling to specified coverage, assembly, and Quality Control (QC).
 
 ![Diagram of stylo steps](assets/stylo_tubemap.png)
 
@@ -28,7 +28,7 @@
 First, download this branch to your preferred directory
 ```bash
 cd /path/to/dir/
-git clone -b nf-core-dev git@github.com:arzoopatel5/stylo.git
+git clone -b nf-core-dev git@github.com:ncezid-biome/stylo.git
 ```
 
 Second, prepare a samplesheet with your input data that looks as follows:
@@ -81,7 +81,7 @@ If a genus is missing, then you'll need to add a row to the lookup table prior t
 
 ## Credits
 
-narst/stylo was originally written by Arzoo Patel, Mohit Thakur.
+ncezid-biome/stylo was originally written by Arzoo Patel, Mohit Thakur.
 
 We thank the following people for their extensive assistance in the development of this pipeline:
 
@@ -94,7 +94,7 @@ If you would like to contribute to this pipeline, please see the [contributing g
 ## Citations
 
 <!-- TODO nf-core: Add citation for pipeline after first release. Uncomment lines below and update Zenodo doi and badge at the top of this file. -->
-<!-- If you use narst/stylo for your analysis, please cite it using the following doi: [10.5281/zenodo.XXXXXX](https://doi.org/10.5281/zenodo.XXXXXX) -->
+<!-- If you use ncezid-biome/stylo for your analysis, please cite it using the following doi: [10.5281/zenodo.XXXXXX](https://doi.org/10.5281/zenodo.XXXXXX) -->
 
 <!-- TODO nf-core: Add bibliography of tools and data used in your pipeline -->
 

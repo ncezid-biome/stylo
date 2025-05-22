@@ -74,7 +74,7 @@ Stylo is developed for PulseNet, a molecular surveillance network for foodborne 
 
 # Availability
 
-Stylo is freely available and open-source. It can be downloaded from the GitHub repository available at [https://github.com/arzoopatel5/stylo](https://github.com/arzoopatel5/stylo).
+Stylo is freely available and open-source. It can be downloaded from the GitHub repository available at [https://github.com/ncezid-biome/stylo](https://github.com/ncezid-biome/stylo).
 
 # Acknowledgements
 

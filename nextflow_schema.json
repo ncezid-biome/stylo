@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://github.com/ncezid-narst/stylo/blob/nf-core-dev/nextflow_schema.json",
-    "title": "narst/stylo pipeline parameters",
+    "$id": "https://github.com/ncezid-ncezid-biome/stylo/blob/nf-core-dev/nextflow_schema.json",
+    "title": "ncezid-biome/stylo pipeline parameters",
     "description": "ONT longread assembly pipeline",
     "type": "object",
     "definitions": {

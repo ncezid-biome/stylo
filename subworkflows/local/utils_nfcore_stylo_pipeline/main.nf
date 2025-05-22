@@ -1,5 +1,5 @@
 //
-// Subworkflow with functionality specific to the narst/stylo pipeline
+// Subworkflow with functionality specific to the ncezid-biome/stylo pipeline
 //
 
 /*

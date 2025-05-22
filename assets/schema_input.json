@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://raw.githubusercontent.com/narst/stylo/master/assets/schema_input.json",
-    "title": "narst/stylo pipeline - params.input schema",
+    "$id": "https://raw.githubusercontent.com/ncezid-biome/stylo/master/assets/schema_input.json",
+    "title": "ncezid-biome/stylo pipeline - params.input schema",
     "description": "Schema for the file provided with params.input",
     "type": "array",
     "items": {
