@@ -1,4 +1,4 @@
-# narst/stylo: Output
+# ncezid-biome/stylo: Output
 
 ## Introduction
 

@@ -1,5 +1,5 @@
 name: Feature request
-description: Suggest an idea for the narst/stylo pipeline
+description: Suggest an idea for the ncezid-biome/stylo pipeline
 labels: enhancement
 body:
   - type: textarea

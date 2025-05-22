@@ -1,4 +1,4 @@
-# narst/stylo: Citations
+# ncezid-biome/stylo: Citations
 
 ## [nf-core](https://pubmed.ncbi.nlm.nih.gov/32055031/)
 

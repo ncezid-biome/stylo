@@ -1,6 +1,6 @@
 {
-    "name": "narst/stylo",
-    "homePage": "https://github.com/narst/stylo",
+    "name": "ncezid-biome/stylo",
+    "homePage": "https://github.com/ncezid-biome/stylo",
     "repos": {
         "https://github.com/nf-core/modules.git": {
             "modules": {
