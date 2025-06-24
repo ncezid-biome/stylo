@@ -70,7 +70,7 @@ Stylo is developed for PulseNet, a molecular surveillance network for foodborne 
 
 5. Output: The pipeline outputs files for each step. Some key files are the assembly by Flye, the final corrected assembly by Medaka, and the quality control summary by BUSCO.
 
-![Diagram of stylo steps.](/github/workspace/assets/stylo_tubemap.png)
+![Diagram of stylo steps.](https://github.com/ncezid-biome/stylo/blob/main/assets/stylo_tubemap.png)
 
 # Availability
 
