@@ -298,6 +298,11 @@
             "default": "genome",
             "description": "Tells busco that your input fastqs are genomic. See documentation for details",
             "hidden": true
+        },
+        "model": {
+            "type": "string",
+            "default": "",
+            "description": "dorado model used for basecalling your input fastqs, this will be used by medaka for polishing the assembly correctly. Its best to leave this blank and let medaka autodetect the model from your fastq files. See README for full list of models and behavior",
         }
     }
 }

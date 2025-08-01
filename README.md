@@ -79,6 +79,18 @@ If a genus is missing, then you'll need to add a row to the lookup table prior t
 2. species (optional, use `-` if you want the lookup table to accept all species within that genus)
 3. genomes size (required, must follow the same format as the other rows in MBs)
 
+### model parameter
+If the model parameter is left blank, then medaka will look for the basecalling model in the fastq header's `RG:Z` tag or in special tags named `basecall_model_version_id` and `model_version_id`.
+If medaka doesn't find a basecalling model in the fastq header it will default to a specific model based on the medaka version.
+
+It's best to let medaka choose the model, but if you must specify the model parameter make sure to use one of the models from the following list
+
+```
+r103_fast_g507, r103_hac_g507, r103_sup_g507, r1041_e82_260bps_fast_g632, r1041_e82_260bps_hac_g632, r1041_e82_260bps_hac_v4.0.0, r1041_e82_260bps_hac_v4.1.0, r1041_e82_260bps_joint_apk_ulk_v5.0.0, r1041_e82_260bps_sup_g632, r1041_e82_260bps_sup_v4.0.0, r1041_e82_260bps_sup_v4.1.0, r1041_e82_400bps_bacterial_methylation, r1041_e82_400bps_fast_g615, r1041_e82_400bps_fast_g632, r1041_e82_400bps_hac_g615, r1041_e82_400bps_hac_g632, r1041_e82_400bps_hac_v4.0.0, r1041_e82_400bps_hac_v4.1.0, r1041_e82_400bps_hac_v4.2.0, r1041_e82_400bps_hac_v4.3.0, r1041_e82_400bps_hac_v5.0.0, r1041_e82_400bps_hac_v5.0.0_rl_lstm384_dwells, r1041_e82_400bps_hac_v5.0.0_rl_lstm384_no_dwells, r1041_e82_400bps_hac_v5.2.0, r1041_e82_400bps_hac_v5.2.0_rl_lstm384_dwells, r1041_e82_400bps_hac_v5.2.0_rl_lstm384_no_dwells, r1041_e82_400bps_sup_g615, r1041_e82_400bps_sup_v4.0.0, r1041_e82_400bps_sup_v4.1.0, r1041_e82_400bps_sup_v4.2.0, r1041_e82_400bps_sup_v4.3.0, r1041_e82_400bps_sup_v5.0.0, r1041_e82_400bps_sup_v5.0.0_rl_lstm384_dwells, r1041_e82_400bps_sup_v5.0.0_rl_lstm384_no_dwells, r1041_e82_400bps_sup_v5.2.0, r1041_e82_400bps_sup_v5.2.0_rl_lstm384_dwells, r1041_e82_400bps_sup_v5.2.0_rl_lstm384_no_dwells, r104_e81_fast_g5015, r104_e81_hac_g5015, r104_e81_sup_g5015, r104_e81_sup_g610, r941_e81_fast_g514, r941_e81_hac_g514, r941_e81_sup_g514, r941_min_fast_g507, r941_min_hac_g507, r941_min_sup_g507, r941_prom_fast_g507, r941_prom_hac_g507, r941_prom_sup_g507, r941_sup_plant_g610
+```
+
+for more details about model selection in medaka, see [medaka model documentation](https://github.com/nanoporetech/medaka/tree/366ff49ad9e2be6862e376630b51b3b3d28944c2#models)
+
 ## Credits
 
 ncezid-biome/stylo was originally written by Arzoo Patel, Mohit Thakur.
