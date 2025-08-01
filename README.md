@@ -97,7 +97,7 @@ ncezid-biome/stylo was originally written by Arzoo Patel, Mohit Thakur.
 
 We thank the following people for their extensive assistance in the development of this pipeline:
 
-Justin Kim, Jessica Chen, Peyton Smith, Lee Katz, Joe Wirth, Curtis Kapsak
+Justin Kim, Jessica Chen, Peyton Smith, Lee S. Katz, Joe Wirth, Curtis Kapsak
 
 ## Contributions and Support
 
