@@ -28,7 +28,7 @@ authors:
   - name: Peyton Smith 
     orcid: 0000-0002-5446-5298
     affiliation: 1 
-  - name: Lee Katz
+  - name: Lee S. Katz
     orcid: 0000-0002-2533-9161
     affiliation: 1 
   - name: Curtis Kapsak 
