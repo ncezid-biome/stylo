@@ -10,8 +10,9 @@ process MEDAKA {
     tuple val(meta), path(reads), path(assembly)
 
     output:
-    tuple val(meta), path("*.fa.gz"), emit: assembly
-    path "versions.yml"             , emit: versions
+    tuple val(meta), path("*.fa.gz")    , emit: assembly
+    tuple val(meta), path("*_model.log"), emit: model
+    path "versions.yml"                 , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -25,11 +26,13 @@ process MEDAKA {
         $args \\
         -i $reads \\
         -d $assembly \\
-        -o ./
+        -o ./ > ${prefix}.log 2>&1
 
     mv consensus.fasta ${prefix}.fa
 
     gzip -n ${prefix}.fa
+
+    grep "Using model" ${prefix}.log | sed "s/.*Using model: //g" > ${prefix}_model.log
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

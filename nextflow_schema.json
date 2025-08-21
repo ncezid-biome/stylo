@@ -302,7 +302,7 @@
         "model": {
             "type": "string",
             "default": "",
-            "description": "dorado model used for basecalling your input fastqs, this will be used by medaka for polishing the assembly correctly. Its best to leave this blank and let medaka autodetect the model from your fastq files. See README for full list of models and behavior",
+            "description": "medaka model used for polishing your assembly. Its best to leave this blank and let the pipeline use the bacterial methylation model (r1041_e82_400bps_bacterial_methylation). See README for full list of models",
         }
     }
 }
