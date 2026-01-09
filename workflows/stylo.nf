@@ -49,25 +49,32 @@ workflow STYLO {
         .subscribe { row -> log.warn "${row[0]} wasn't found in the lookup table, this could be a mispelling" }
 
     // code for adding genome_size to the samplesheet CORRECTLY
-    ch_samplesheet_reordered = ch_samplesheet.map { meta, fastq, genus, species -> [[genus, species, meta, fastq]] }
+    ch_samplesheet_reordered = ch_samplesheet.map { meta, fastq, genus, species, genome_size -> [[genus, species, meta, fastq, genome_size]] }
+    // samplesheet.combine(lookup_table) = [[genus(0,0), species(0,1), meta(0,2), fastq(0,3), genome_size(0,4)],[genus(1,0), species(1,1), genome_size(1,2)]]
+    ch_samplesheet_plus_gsgs = ch_samplesheet_reordered.combine(ch_lookup_table)
+        .filter( row -> row[0][4] != "-" ) //filter for samplesheet with genome_size value
+        .map {
+            row -> [[ row[0][0], row[0][1], row[0][2], row[0][3], row[0][4]],[row[1][0], row[1][1], row[0][4]]]
+        } // replace genome_size in lookuptable's spot (1,2) with genome_size from samplesheet(0,4)
     ch_samplesheet_plus_gs = ch_samplesheet_reordered.combine(ch_lookup_table)
         .filter( row -> row[0][0] == row[1][0] ) // samplesheet genus matches lookup genus
         .filter( row -> row[0][1] == row[1][1] ) // samplesheet species matches lookup species
     ch_samplesheet_plus_g = ch_samplesheet_reordered.combine(ch_lookup_table)
         .filter( row -> row[0][0] == row[1][0] ) // samplesheet genus matches lookup genus
         .filter( row -> row[1][1] == '-' ) // samplesheet species doesn't match lookup species
-    ch_samplesheet_plus = ch_samplesheet_plus_gs
+    ch_samplesheet_plus = ch_samplesheet_plus_gsgs
         // combine both conditional samplesheets in order
+        .concat(ch_samplesheet_plus_gs)
         .concat(ch_samplesheet_plus_g)
         // remap to remove extra []
-        // meta, genus, species, fasta, genome_size
+        // meta, genus, species, fastq, genome_size
         .map {
             row -> [row[0][2], row[0][0], row[0][1], row[0][3], row[1][2]]
         }
         // group by meta id
         .groupTuple(by:0)
         // take first element of each group
-        // meta, fasta, genus, species, genome_size
+        // meta, fastq, genus, species, genome_size
         .map {
             row -> [ row[0], row[3][0], row[1][0], row[2][0], row[4][0] ]
         }
