@@ -8,6 +8,7 @@ process MEDAKA {
 
     input:
     tuple val(meta), path(reads), path(assembly)
+    path medaka_model_dir
 
     output:
     tuple val(meta), path("*.fa.gz")    , emit: assembly
@@ -21,6 +22,11 @@ process MEDAKA {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
+    ls -l $medaka_model_dir
+    USER_PATH=\$(getconf PATH)
+    printenv > ${prefix}_3.log 2>&1
+    set +u; env - PATH="\$PATH" \${TMP:+SINGULARITYENV_TMP="\$TMP"} \${TMPDIR:+SINGULARITYENV_TMPDIR="\$TMPDIR"} \${NXF_TASK_WORKDIR:+SINGULARITYENV_NXF_TASK_WORKDIR="\$NXF_TASK_WORKDIR"} SINGULARITYENV_NXF_DEBUG="\${NXF_DEBUG:=0}" printenv > ${prefix}_4.log 2>&1
+    medaka tools resolve_model --model \$(echo $args | cut -f 2 -d ' ') # > ${prefix}_2.log 2>&1
     medaka_consensus \\
         -t $task.cpus \\
         $args \\

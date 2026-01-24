@@ -109,7 +109,7 @@ workflow STYLO {
 
     POSTPROCESSING_QC (
         ASSEMBLY.out.assembly,
-        READS_PREPROCESSING.out.reads,
+        READS_PREPROCESSING.out.reads
     )
     ch_versions = ch_versions.mix(POSTPROCESSING_QC.out.versions)
 
