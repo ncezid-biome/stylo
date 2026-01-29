@@ -10,7 +10,6 @@
 
 include { DNAAPLER           } from '../../../modules/local/dnaapler/main'
 include { MEDAKA             } from '../../../modules/local/medaka/main'
-include { DORADO_POLISH      } from '../../../modules/local/dorado/polish/main'
 include { BUSCO_BUSCO        } from '../../../modules/nf-core/busco/busco/main'
 
 /*
@@ -40,19 +39,9 @@ workflow POSTPROCESSING_QC {
     //
     // MODULE: create consensus sequences
     //
-    DORADO_POLISH (
-        ch_processed_reads.combine(DNAAPLER.out.assembly, by:0),
-        "/scicomp/home-pure/pps0/.dorado_models/"
-    )
-    ch_versions = ch_versions.mix(DORADO_POLISH.out.versions)
-
-
-    //
-    // MODULE: create consensus sequences
-    //
     MEDAKA (
         ch_processed_reads.combine(DNAAPLER.out.assembly, by:0),
-        "/scicomp/home-pure/pps0/.medaka/data"
+        params.model_dir
     )
     ch_versions = ch_versions.mix(MEDAKA.out.versions)
     
@@ -61,13 +50,11 @@ workflow POSTPROCESSING_QC {
     // MODULE: qc assembly
     //
     BUSCO_BUSCO (
-        DORADO_POLISH.out.assembly,
-        //MEDAKA.out.assembly,
+        MEDAKA.out.assembly,
         params.busco_mode,
         params.lineage,
         [],
         [],
-        true
     )
     ch_versions = ch_versions.mix(BUSCO_BUSCO.out.versions)
 

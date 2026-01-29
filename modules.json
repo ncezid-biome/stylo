@@ -7,7 +7,7 @@
                 "nf-core": {
                     "busco/busco": {
                         "branch": "master",
-                        "git_sha": "01c13d3445bb83b98397e286b88664d1c371af76",
+                        "git_sha": "9a19690b0a3fae05fa1a6ad90a0720d681429e31",
                         "installed_by": ["modules"]
                     },
                     "nanoq": {
