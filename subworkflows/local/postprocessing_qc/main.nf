@@ -10,7 +10,7 @@
 
 include { DNAAPLER           } from '../../../modules/local/dnaapler/main'
 include { MEDAKA             } from '../../../modules/local/medaka/main'
-include { BUSCO_BUSCO        } from '../../../modules/nf-core/busco/busco/main'
+include { QUAST              } from '../../../modules/nf-core/quast/main'
 
 /*
 ========================================================================================
@@ -49,14 +49,12 @@ workflow POSTPROCESSING_QC {
     //
     // MODULE: qc assembly
     //
-    BUSCO_BUSCO (
+    QUAST (
         MEDAKA.out.assembly,
-        params.busco_mode,
-        params.lineage,
-        [],
-        [],
+        [[],[]],
+        [[],[]],
     )
-    ch_versions = ch_versions.mix(BUSCO_BUSCO.out.versions)
+    ch_versions = ch_versions.mix(QUAST.out.versions)
 
     emit:
     versions = ch_versions
