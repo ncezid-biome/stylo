@@ -38,9 +38,9 @@
 
   > Medaka. Github. (2024). https://github.com/nanoporetech/medaka
 
-- [BUSCO](https://www.nature.com/articles/nbt.3820)
+- [QUAST](https://academic.oup.com/bioinformatics/article/34/13/i142/5045727)
 
-  > BUSCO. Github. (2021). https://github.com/metashot/busco
+  > Alla Mikheenko, Andrey Prjibelski, Vladislav Saveliev, Dmitry Antipov, Alexey Gurevich, Versatile genome assembly evaluation with QUAST-LG, Bioinformatics (2018) 34 (13): i142-i150. doi: 10.1093/bioinformatics/bty266 First published online: June 27, 2018
 
 ## Software packaging/containerisation tools
 

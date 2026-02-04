@@ -50,7 +50,7 @@ bibliography: paper.bib
 
 # Summary
 
-Oxford Nanopore Technologies (ONT) sequencing is a promising technology with many potential applications in food safety. We have developed stylo, a lightweight nf-core style assembly workflow for ONT long-reads, specifically optimized for enteric bacteria. The pipeline downsamples, assembles, and performs post-processing and quality control by combining nanoq [@Steinig2022], Rasusa [@Hall2022], Flye [@Kolmogorov2019], Dnaapler [@Bouras2024], Medaka [@medaka], and BUSCO [@Seppey2019].  All of stylo’s dependencies are containerized and the pipeline is available on GitHub. 
+Oxford Nanopore Technologies (ONT) sequencing is a promising technology with many potential applications in food safety. We have developed stylo, a lightweight nf-core style assembly workflow for ONT long-reads, specifically optimized for enteric bacteria. The pipeline downsamples, assembles, and performs post-processing and quality control by combining nanoq [@Steinig2022], Rasusa [@Hall2022], Flye [@Kolmogorov2019], Dnaapler [@Bouras2024], Medaka [@medaka], and QUAST [@Mikheenko2018].  All of stylo’s dependencies are containerized and the pipeline is available on GitHub. 
 
 # Statement of Need
 
@@ -66,9 +66,9 @@ Stylo is developed for PulseNet, a molecular surveillance network for foodborne 
 
 3. Assembly: Flye is run on the subsampled fastq using the "--nano-hq" mode by default, expecting high-quality ONT reads. This parameter can be changed by the user. 
 
-4. Post-processing and Quality Control: The pipeline uses "dnaapler all" to reorient contigs to begin at a specific genes. The pipeline then uses Medaka to correct assembly sequences. Finally, the assembly quality is assessed via BUSCO, run with parameter mode set to "genome". 
+4. Post-processing and Quality Control: The pipeline uses "dnaapler all" to reorient contigs to begin at a specific genes. The pipeline then uses Medaka to correct assembly sequences. Finally, the assembly quality is assessed via QUAST with the following speedup options: "--no-check", "--no-plots", "--no-html", "--no-icarus", "--no-snps", "--no-sv".
 
-5. Output: The pipeline outputs files for each step. Some key files are the assembly by Flye, the final corrected assembly by Medaka, and the quality control summary by BUSCO.
+5. Output: The pipeline outputs files for each step. Some key files are the assembly by Flye, the final corrected assembly by Medaka, and the quality control summary by QUAST.
 
 ![Diagram of stylo steps.](stylo_tubemap.png)
 

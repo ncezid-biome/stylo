@@ -15,7 +15,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - [Flye](#flye) - Assembly
 - [Dnaapler](#dnaapler) - Reorientation of contigs
 - [Medaka](#medaka) - Assembly error correction
-- [BUSCO](#busco) - Assembly QC
+- [QUAST](#quast) - Assembly QC
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
 
 ### nanoq
@@ -87,20 +87,19 @@ For further reading and documentation see [dnaapler usage](https://github.com/gb
 
 Neural network sequence error correction. For further reading and documentation see [medaka usage](https://github.com/nanoporetech/medaka?tab=readme-ov-file#usage).
 
-### BUSCO
+### QUAST
 
 <details markdown="1">
 <summary>Output files</summary>
 
-- `busco/`
-  - `*-auto-busco/`: Directory containing all intermediate outputs of busco
-  - `*-auto-busco.batch_summary.txt`: full QC summary
-  - `short_summary.generic.*` : QC summary for generic organisms (bacteria, ...)
-  - `short_summary.specific.*` : QC summary for specific organisms (enterobacteriaceae, campylobacterota, ...)
+- `quast/`
+  - `*.tsv`,`*/report.tsv`,`*/transposed_report.tsv`: Final summary of assembly stats in tsv format
+  - `*/report.tex`,`*/transposed_report.tex`: Final summary of assembly stats in TeX format
+  - `*/report.txt`,`*/transposed_report.txt`: Final summary of assembly stats in an easy to read txt format
 
 </details>
 
-BUSCO provides measures for quantitative assessment of genome assembly, gene set, and transcriptome completeness based on evolutionarily informed expectations of gene content from near-universal single-copy orthologs selected from OrthoDB. For further reading and documentation see the [busco github](https://github.com/metashot/busco).
+QUAST provides evaluates genome assemblies by computing various metrics, such as N50, L50, GC content, length and contig distributions ... 
 
 ### Pipeline information
 

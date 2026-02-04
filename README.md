@@ -9,7 +9,7 @@
 3. Assembles reads ([Flye](https://github.com/mikolmogorov/Flye))
 4. Reorients assembly ([Dnaapler](https://github.com/gbouras13/dnaapler))
 5. Error correction ([Medaka](https://github.com/nanoporetech/medaka))
-6. QCs assembly ([busco](https://github.com/metashot/busco))
+6. QCs assembly ([QUAST](https://github.com/ablab/quast))
 
 ## Usage
 
