@@ -1,0 +1,53 @@
+Changes in module 'nf-core/medaka'
+--- modules/nf-core/medaka/main.nf
++++ modules/nf-core/medaka/main.nf
+@@ -2,17 +2,18 @@
+     tag "$meta.id"
+     label 'process_high'
+ 
+-    conda "${moduleDir}/environment.yml"
+     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+-        'https://depot.galaxyproject.org/singularity/medaka:1.4.4--py38h130def0_0' :
+-        'biocontainers/medaka:1.4.4--py38h130def0_0' }"
++        'https://depot.galaxyproject.org/singularity/medaka%3A2.1.1--py312ha65e1bd_0' :
++        'biocontainers/medaka%3A2.1.1--py312ha65e1bd_0' }"
+ 
+     input:
+     tuple val(meta), path(reads), path(assembly)
++    path model_dir
+ 
+     output:
+-    tuple val(meta), path("*.fa.gz"), emit: assembly
+-    path "versions.yml"             , emit: versions
++    tuple val(meta), path("*.fa.gz")    , emit: assembly
++    tuple val(meta), path("*_model.log"), emit: model
++    path "versions.yml"                 , emit: versions
+ 
+     when:
+     task.ext.when == null || task.ext.when
+@@ -26,11 +27,13 @@
+         $args \\
+         -i $reads \\
+         -d $assembly \\
+-        -o ./
++        -o ./ > ${prefix}.log 2>&1
+ 
+     mv consensus.fasta ${prefix}.fa
+ 
+     gzip -n ${prefix}.fa
++
++    grep "Using model" ${prefix}.log | sed "s/.*Using model: //g" > ${prefix}_model.log
+ 
+     cat <<-END_VERSIONS > versions.yml
+     "${task.process}":
+
+--- modules/nf-core/medaka/environment.yml
++++ modules/nf-core/medaka/environment.yml
+@@ -2,4 +2,4 @@
+   - conda-forge
+   - bioconda
+ dependencies:
+-  - bioconda::medaka=1.4.4
++  - bioconda::medaka=2.1.1
+
+************************************************************

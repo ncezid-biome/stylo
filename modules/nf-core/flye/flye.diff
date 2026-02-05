@@ -1,0 +1,24 @@
+Changes in module 'nf-core/flye'
+--- modules/nf-core/flye/main.nf
++++ modules/nf-core/flye/main.nf
+@@ -8,7 +8,7 @@
+         'community.wave.seqera.io/library/flye:2.9.5--0221998e9c3ec606' }"
+ 
+     input:
+-    tuple val(meta), path(reads)
++    tuple val(meta), path(reads), val(genome_size)
+     val mode
+ 
+     output:
+@@ -35,7 +35,8 @@
+         --out-dir . \\
+         --threads \\
+         $task.cpus \\
+-        $args
++        $args \\
++        -g $genome_size
+ 
+     gzip -c assembly.fasta > ${prefix}.assembly.fasta.gz
+     gzip -c assembly_graph.gfa > ${prefix}.assembly_graph.gfa.gz
+
+************************************************************

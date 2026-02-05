@@ -9,7 +9,7 @@
 */
 
 include { DNAAPLER           } from '../../../modules/local/dnaapler/main'
-include { MEDAKA             } from '../../../modules/local/medaka/main'
+include { MEDAKA             } from '../../../modules/nf-core/medaka/main'
 include { QUAST              } from '../../../modules/nf-core/quast/main'
 
 /*
