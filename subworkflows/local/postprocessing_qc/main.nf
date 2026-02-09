@@ -9,8 +9,8 @@
 */
 
 include { DNAAPLER           } from '../../../modules/local/dnaapler/main'
-include { MEDAKA             } from '../../../modules/local/medaka/main'
-include { BUSCO_BUSCO        } from '../../../modules/nf-core/busco/busco/main'
+include { MEDAKA             } from '../../../modules/nf-core/medaka/main'
+include { QUAST              } from '../../../modules/nf-core/quast/main'
 
 /*
 ========================================================================================
@@ -40,21 +40,21 @@ workflow POSTPROCESSING_QC {
     // MODULE: create consensus sequences
     //
     MEDAKA (
-        ch_processed_reads.combine(DNAAPLER.out.assembly, by:0)
+        ch_processed_reads.combine(DNAAPLER.out.assembly, by:0),
+        params.model_dir
     )
     ch_versions = ch_versions.mix(MEDAKA.out.versions)
+    
 
     //
     // MODULE: qc assembly
     //
-    BUSCO_BUSCO (
+    QUAST (
         MEDAKA.out.assembly,
-        params.busco_mode,
-        params.lineage,
-        [],
-        []
+        [[],[]],
+        [[],[]],
     )
-    ch_versions = ch_versions.mix(BUSCO_BUSCO.out.versions)
+    ch_versions = ch_versions.mix(QUAST.out.versions)
 
     emit:
     versions = ch_versions

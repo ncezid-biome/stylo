@@ -288,21 +288,16 @@
             "default": "",
             "description": "Min overlap length for two reads to be considered overlapping during assembly. Set automatically by flye, see documentation for details"
         },
-        "lineage": {
-            "type": "string",
-            "default": "auto",
-            "description": "Tells busco what lineage to use. See busco documentation for details"
-        },
-        "busco_mode": {
-            "type": "string",
-            "default": "genome",
-            "description": "Tells busco that your input fastqs are genomic. See documentation for details",
-            "hidden": true
-        },
         "model": {
             "type": "string",
             "default": "",
             "description": "medaka model used for polishing your assembly. Its best to leave this blank and let the pipeline use the bacterial methylation model (r1041_e82_400bps_bacterial_methylation). See README for full list of models",
+        },
+        "model_dir": {
+            "type": "string",
+            "default": "$HOME/.medaka/data/",
+            "description": "medaka model directory, this is where medaka looks for models",
+            "hidden": true
         }
     }
 }

@@ -34,40 +34,51 @@ workflow STYLO {
 
     // code for sanity checking spelling of genus in samplesheet
     ch_samplesheet_genus_list = ch_samplesheet
-        .map { row -> row[2]}
-        .flatten()
+        .map { row -> [row[2], row[4], row[0]]}
         .unique()
-        .map { genus -> [genus, "s"]}
+        .map { genus, genomes_size, meta -> [genus, [genomes_size, "s"], meta]}
     ch_lookup_table_genus_list = ch_lookup_table
         .map { row -> row[0][0]}
         .flatten()
         .unique()
         .map { genus -> [genus, "l"]}
-    ch_samplesheet_genus_list.concat(ch_lookup_table_genus_list)
+    ch_lookup_table_genus_list.concat(ch_samplesheet_genus_list)
         .groupTuple(by:0)
-        .filter{ row -> row[1] == ["s"]}
-        .subscribe { row -> log.warn "${row[0]} wasn't found in the lookup table, this could be a mispelling" }
+        .filter{ row -> row[1][0] != "l"}
+        .subscribe { row -> log.warn "${row[2].id}, ${row[0]} wasn't found in the lookup table. If you would like to automatically assign the genome size, you can add ${row[0]} to the lookup table" }
+    ch_lookup_table_genus_list.concat(ch_samplesheet_genus_list)
+        .groupTuple(by:0)
+        .filter{ row -> row[1][0] != "l"}
+        .filter{ row -> row[1][0][0] == "-"}
+        .subscribe { row -> log.error "${row[2].id} will be SKIPPED. ${row[0]} wasn't found in the lookup table and a genome size was not provided. Please provide a genome size in the samplesheet or add the organism to the lookup table" }
 
     // code for adding genome_size to the samplesheet CORRECTLY
-    ch_samplesheet_reordered = ch_samplesheet.map { meta, fastq, genus, species -> [[genus, species, meta, fastq]] }
+    ch_samplesheet_reordered = ch_samplesheet.map { meta, fastq, genus, species, genome_size -> [[genus, species, meta, fastq, genome_size]] }
+    // samplesheet.combine(lookup_table) = [[genus(0,0), species(0,1), meta(0,2), fastq(0,3), genome_size(0,4)],[genus(1,0), species(1,1), genome_size(1,2)]]
+    ch_samplesheet_plus_gsgs = ch_samplesheet_reordered.combine(ch_lookup_table)
+        .filter( row -> row[0][4] != "-" ) //filter for samplesheet with genome_size value
+        .map {
+            row -> [[ row[0][0], row[0][1], row[0][2], row[0][3], row[0][4]],[row[1][0], row[1][1], row[0][4]]]
+        } // replace genome_size in lookuptable's spot (1,2) with genome_size from samplesheet(0,4)
     ch_samplesheet_plus_gs = ch_samplesheet_reordered.combine(ch_lookup_table)
         .filter( row -> row[0][0] == row[1][0] ) // samplesheet genus matches lookup genus
         .filter( row -> row[0][1] == row[1][1] ) // samplesheet species matches lookup species
     ch_samplesheet_plus_g = ch_samplesheet_reordered.combine(ch_lookup_table)
         .filter( row -> row[0][0] == row[1][0] ) // samplesheet genus matches lookup genus
         .filter( row -> row[1][1] == '-' ) // samplesheet species doesn't match lookup species
-    ch_samplesheet_plus = ch_samplesheet_plus_gs
+    ch_samplesheet_plus = ch_samplesheet_plus_gsgs
         // combine both conditional samplesheets in order
+        .concat(ch_samplesheet_plus_gs)
         .concat(ch_samplesheet_plus_g)
         // remap to remove extra []
-        // meta, genus, species, fasta, genome_size
+        // meta, genus, species, fastq, genome_size
         .map {
             row -> [row[0][2], row[0][0], row[0][1], row[0][3], row[1][2]]
         }
         // group by meta id
         .groupTuple(by:0)
         // take first element of each group
-        // meta, fasta, genus, species, genome_size
+        // meta, fastq, genus, species, genome_size
         .map {
             row -> [ row[0], row[3][0], row[1][0], row[2][0], row[4][0] ]
         }
@@ -98,7 +109,7 @@ workflow STYLO {
 
     POSTPROCESSING_QC (
         ASSEMBLY.out.assembly,
-        READS_PREPROCESSING.out.reads,
+        READS_PREPROCESSING.out.reads
     )
     ch_versions = ch_versions.mix(POSTPROCESSING_QC.out.versions)
 

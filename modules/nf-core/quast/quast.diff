@@ -1,0 +1,15 @@
+Changes in module 'nf-core/quast'
+--- modules/nf-core/quast/main.nf
++++ modules/nf-core/quast/main.nf
+@@ -38,9 +38,6 @@
+         ${consensus.join(' ')}
+ 
+     ln -s ${prefix}/report.tsv ${prefix}.tsv
+-    [ -f  ${prefix}/contigs_reports/all_alignments_transcriptome.tsv ] && ln -s ${prefix}/contigs_reports/all_alignments_transcriptome.tsv ${prefix}_transcriptome.tsv
+-    [ -f  ${prefix}/contigs_reports/misassemblies_report.tsv         ] && ln -s ${prefix}/contigs_reports/misassemblies_report.tsv ${prefix}_misassemblies.tsv
+-    [ -f  ${prefix}/contigs_reports/unaligned_report.tsv             ] && ln -s ${prefix}/contigs_reports/unaligned_report.tsv ${prefix}_unaligned.tsv
+ 
+     cat <<-END_VERSIONS > versions.yml
+     "${task.process}":
+
+************************************************************

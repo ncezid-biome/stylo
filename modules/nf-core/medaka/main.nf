@@ -8,6 +8,7 @@ process MEDAKA {
 
     input:
     tuple val(meta), path(reads), path(assembly)
+    path model_dir
 
     output:
     tuple val(meta), path("*.fa.gz")    , emit: assembly
