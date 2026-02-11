@@ -1,0 +1,5 @@
+sample,fastq,genus,species,genome_size
+sample1,/path/to/sample1.fastq.gz,Salmonella,enterica,4.8m
+sample2,/path/to/sample2.fastq.gz,Campylobacter,coli,-
+sample3,/path/to/sample3.fastq.gz,Pseudomonas,aeruginosa,6.0m
+sample3,/path/to/sample3.fastq.gz,Bacteroides,fragilis,5.2m
