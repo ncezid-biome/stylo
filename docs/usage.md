@@ -40,7 +40,7 @@ sample3,/path/to/sample3.fastq.gz,Bacteroides,fragilis,5.2m
 | `fastq` | path | Full path to FastQ file for ONT longreads. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
 | `genus` | string | genus of the sample. This must be provided for the pipeline to run, otherwise the row will be skipped. |
 | `species` | string OR `-` | species of the sample. If you don't know the species or would like to skip this part use `-` as seen in the example samplesheet. Note that this might affect some assemblies such as Vibrio where different species within the genus have different genome sizes |
-| `genome_size` | float followed by valid unit prefix (i.e. `5.0m`, `425.0k`) OR `-` | genome size of the sample. If you would like to use a non-default genome_size, you can specify it here. You can find or define default organisms in the [lookup table](../README.md#editing-the-lookup-table). Additionally if you have a non-default organism you must specify a genome_size. |
+| `genome_size` | float followed by valid unit prefix (i.e. `5.0m`, `425.0k`) OR `-` | genome size of the sample. If you would like to use a non-default genome_size, you can specify it here. You can find or define default organisms in the [lookup table](#editing-the-lookup-table). Additionally if you have a non-default organism you must specify a genome_size. |
 
 
 ## Running the pipeline
@@ -89,7 +89,7 @@ outdir: './results/'
 ## Advanced Usage
 
 ### Editing the Lookup Table
-If a genus is missing, then you'll need to add a row to the lookup table prior to running the pipeline. In order to add a row to the lookup table you'll need the following information:
+You can use the default [lookup table](../conf/lookup_table.tsv) provided with stylo, or you can create your own custom lookup table and use the `--lookup_table` flag. If a sample's genus is non-default (not found in the lookup table), then you must add a genome_size to the sample's row in the samplesheet. If a genus is missing, then you'll need to add a row to the lookup table prior to running the pipeline. In order to add a row to the lookup table you'll need the following information:
 
 1. genus (required)
 2. species (optional, use `-` if you want the lookup table to accept all species within that genus)

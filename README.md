@@ -41,9 +41,9 @@ sample5,/path/to/sample5.fastq.gz,Pseudomonas,aeruginosa,6.0m
 Each row represents a fastq file (single-end) with the known genus, species, and genome size.
 
 > [!NOTE]
-> You can use `-` where the species is unknown. If the organism is not in the [lookup table](conf/lookup_table.tsv), you must include a genome size. for more details see [full samplesheet description](docs/usage.md#full-samplesheet)
+> You can use `-` where the species is unknown. If the organism is not in the [lookup table](conf/lookup_table.tsv), you must include a genome size. For more details see [full samplesheet description](docs/usage.md#full-samplesheet)
 
-If you'd like to edit the lookup table to add your organism as a default see [Advanced Usage](docs/usage.md#advanced-usage)
+If you'd like to create your own lookup table see [Advanced Usage](docs/usage.md#advanced-usage)
 
 
 Now, you can run the pipeline using:
