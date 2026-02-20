@@ -1,0 +1,9 @@
+name: plasmid workflow
+on: push
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: nf-core/setup-nextflow@v1
+      - run: nextflow run main.nf -profile test,singularity --outdir output/
