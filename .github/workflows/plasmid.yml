@@ -8,6 +8,5 @@ jobs:
       - uses: nf-core/setup-nextflow@v1
       - uses: eWaterCycle/setup-apptainer@4bb22c52d4f63406c49e94c804632975787312b3
         if: matrix.profile == 'singularity'
-      - run: mkdir -p $NXF_SINGULARITY_CACHEDIR; mkdir -p $NXF_SINGULARITY_LIBRARYDIR
       - run: nextflow run main.nf -profile test,singularity --outdir output/
  
