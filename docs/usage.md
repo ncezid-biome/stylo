@@ -42,14 +42,13 @@ sample3,/path/to/sample3.fastq.gz,Bacteroides,fragilis,5.2m
 | `species` | string OR `-` | species of the sample. If you don't know the species or would like to skip this part use `-` as seen in the example samplesheet. Note that this might affect some assemblies such as Vibrio where different species within the genus have different genome sizes |
 | `genome_size` | float followed by valid unit prefix (i.e. `5.0m`, `425.0k`) OR `-` | genome size of the sample. If you would like to use a non-default genome_size, you can specify it here. You can find or define default organisms in the [lookup table](../README.md#editing-the-lookup-table). Additionally if you have a non-default organism you must specify a genome_size. |
 
-An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
 
 ## Running the pipeline
 
 The typical command for running the pipeline is as follows:
 
 ```bash
-nextflow run ncezid-biome/stylo -r v1.3.0 --input /path/to/samplesheet.csv --outdir ./results -profile singularity
+nextflow run ncezid-biome/stylo -r v1.3.1 --input /path/to/samplesheet.csv --outdir ./results -profile singularity
 ```
 
 This will launch the pipeline with the `singularity` configuration profile. See below for more information about profiles.

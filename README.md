@@ -17,7 +17,7 @@
 > If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/usage/installation) on how to set-up Nextflow.
 
 > [!NOTE]
-> This pipeline was tested using the following, other versions may work but are currently untested
+> This pipeline was tested using the following, other versions may work but are currently untested.
 > 
 > nf-core v2.14.1
 > 
@@ -50,13 +50,14 @@ Now, you can run the pipeline using:
 
 ```bash
 nextflow run ncezid-biome/stylo \
-   -r v1.3.0 \
-   -profile singularity
+   -r v1.3.1 \
+   -profile singularity \
    --input samplesheet.csv \
    --outdir <OUTDIR>
 ```
 
-If you're on CDC servers use `-profile rosalind`
+> [!NOTE]
+> For CDC users, please see [CDC Usage](docs/CDC.md)
 
 
 > [!WARNING]
