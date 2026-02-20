@@ -12,11 +12,11 @@ You will need to create a samplesheet with information about the samples you wou
 
 ### Full samplesheet
 
-The samplesheet can have as many columns as you desire, however, there is a strict requirement for the first 4 columns to match those defined in the table below.
+There is a strict requirement for the first 4 columns of the samplesheet to match those defined in the table below. The 5th column is optional.
 
-A final samplesheet file may look something like the one below.
+A few example samplesheets are provided below and included in [assets](../assets/).
 
-```csv title="samplesheet.csv"
+```csv title="samplesheet_basic.csv"
 sample,fastq,genus,species
 sample1,/path/to/sample1.fastq.gz,Salmonella,enterica
 sample2,/path/to/sample2.fastq.gz,Campylobacter,coli
@@ -25,21 +25,30 @@ sample4,/path/to/sample4.fastq.gz,Vibrio,-
 sample5,/path/to/sample5.fastq.gz,Salmonella,enterica
 ```
 
-| Column    | Description                                                                                                                                                                            |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sample`  | Custom sample name. This entry must be unique. |
-| `fastq` | Full path to FastQ file for ONT longreads. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
-| `genus` | genus of the sample. This must be provided for the pipeline to run, otherwise the row will be skipped. |
-| `species` | species of the sample. If you don't know the species or would like to skip this part use `-` as seen in the example samplesheet. Note that this might affect some assemblies such as Vibrio where different species within the genus have different genome sizes |
+```csv title="samplesheet_extra_genomes.csv"
+sample,fastq,genus,species,genome_size
+sample1,/path/to/sample1.fastq.gz,Salmonella,enterica,4.8m
+sample2,/path/to/sample2.fastq.gz,Campylobacter,coli,-
+sample3,/path/to/sample3.fastq.gz,Pseudomonas,aeruginosa,6.0m
+sample3,/path/to/sample3.fastq.gz,Bacteroides,fragilis,5.2m
+```
 
-An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
+
+| Column    | Format | Description                                                                                                                                                                            |
+| --------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sample`  | string | Custom sample name. This entry must be unique. |
+| `fastq` | path | Full path to FastQ file for ONT longreads. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
+| `genus` | string | genus of the sample. This must be provided for the pipeline to run, otherwise the row will be skipped. |
+| `species` | string OR `-` | species of the sample. If you don't know the species or would like to skip this part use `-` as seen in the example samplesheet. Note that this might affect some assemblies such as Vibrio where different species within the genus have different genome sizes |
+| `genome_size` | float followed by valid unit prefix (i.e. `5.0m`, `425.0k`) OR `-` | genome size of the sample. If you would like to use a non-default genome_size, you can specify it here. You can find or define default organisms in the [lookup table](#editing-the-lookup-table). Additionally if you have a non-default organism you must specify a genome_size. |
+
 
 ## Running the pipeline
 
 The typical command for running the pipeline is as follows:
 
 ```bash
-nextflow run /path/to/stylo/main.nf --input /path/to/samplesheet.csv --outdir ./results -profile singularity
+nextflow run ncezid-biome/stylo -r v1.3.1 --input /path/to/samplesheet.csv --outdir ./results -profile singularity
 ```
 
 This will launch the pipeline with the `singularity` configuration profile. See below for more information about profiles.
@@ -77,7 +86,72 @@ outdir: './results/'
 <...>
 ```
 
-You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-co.re/launch).
+## Advanced Usage
+
+### Editing the Lookup Table
+You can use the default [lookup table](../conf/lookup_table.tsv) provided with stylo, or you can create your own custom lookup table and use the `--lookup_table` flag. If a sample's genus is non-default (not found in the lookup table), then you must add a genome_size to the sample's row in the samplesheet. If a genus is missing, then you'll need to add a row to the lookup table prior to running the pipeline. In order to add a row to the lookup table you'll need the following information:
+
+1. genus (required)
+2. species (optional, use `-` if you want the lookup table to accept all species within that genus)
+3. genomes size (required, must follow the same format as the other rows in MBs)
+
+### model parameter
+If the model parameter is left blank, the pipeline will choose the bacterial methylation model `r1041_e82_400bps_bacterial_methylation`.
+It's best to let the pipleine use the bacterial methylation model, but if you must specify the model parameter make sure to use one of the models from the following list
+
+```
+r103_sup_g507
+r1041_e82_260bps_fast_g632
+r1041_e82_260bps_hac_g632
+r1041_e82_260bps_hac_v4.0.0
+r1041_e82_260bps_hac_v4.1.0
+r1041_e82_260bps_joint_apk_ulk_v5.0.0
+r1041_e82_260bps_sup_g632
+r1041_e82_260bps_sup_v4.0.0
+r1041_e82_260bps_sup_v4.1.0
+r1041_e82_400bps_bacterial_methylation
+r1041_e82_400bps_fast_g615
+r1041_e82_400bps_fast_g632
+r1041_e82_400bps_hac_g615
+r1041_e82_400bps_hac_g632
+r1041_e82_400bps_hac_v4.0.0
+r1041_e82_400bps_hac_v4.1.0
+r1041_e82_400bps_hac_v4.2.0
+r1041_e82_400bps_hac_v4.3.0
+r1041_e82_400bps_hac_v5.0.0
+r1041_e82_400bps_hac_v5.0.0_rl_lstm384_dwells
+r1041_e82_400bps_hac_v5.0.0_rl_lstm384_no_dwells
+r1041_e82_400bps_hac_v5.2.0
+r1041_e82_400bps_hac_v5.2.0_rl_lstm384_dwells
+r1041_e82_400bps_hac_v5.2.0_rl_lstm384_no_dwells
+r1041_e82_400bps_sup_g615
+r1041_e82_400bps_sup_v4.0.0
+r1041_e82_400bps_sup_v4.1.0
+r1041_e82_400bps_sup_v4.2.0
+r1041_e82_400bps_sup_v4.3.0
+r1041_e82_400bps_sup_v5.0.0
+r1041_e82_400bps_sup_v5.0.0_rl_lstm384_dwells
+r1041_e82_400bps_sup_v5.0.0_rl_lstm384_no_dwells
+r1041_e82_400bps_sup_v5.2.0
+r1041_e82_400bps_sup_v5.2.0_rl_lstm384_dwells
+r1041_e82_400bps_sup_v5.2.0_rl_lstm384_no_dwells
+r104_e81_fast_g5015
+r104_e81_hac_g5015
+r104_e81_sup_g5015
+r104_e81_sup_g610
+r941_e81_fast_g514
+r941_e81_hac_g514
+r941_e81_sup_g514
+r941_min_fast_g507
+r941_min_hac_g507
+r941_min_sup_g507
+r941_prom_fast_g507
+r941_prom_hac_g507
+r941_prom_sup_g507
+```
+
+for more details about model selection in medaka, see [medaka model documentation](https://github.com/nanoporetech/medaka/tree/366ff49ad9e2be6862e376630b51b3b3d28944c2#models)
+
 
 ## Core Nextflow arguments
 
@@ -95,7 +169,7 @@ Two profiles are bundled with the pipeline which instruct the pipeline to use so
 We highly recommend the use of Singularity containers for full pipeline reproducibility.
 :::
 
-Note that multiple profiles can be loaded, for example: `-profile test,docker` - the order of arguments is important!
+Note that multiple profiles can be loaded, for example: `-profile test,singularity` - the order of arguments is important!
 They are loaded in sequence, so later profiles can overwrite earlier profiles.
 
 If `-profile` is not specified, the pipeline will run locally and expect all software to be installed and available on the `PATH`. This is _not_ recommended, since it can lead to different results on different machines dependent on the computer environment.

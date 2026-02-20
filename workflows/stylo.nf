@@ -28,7 +28,7 @@ workflow STYLO {
     ch_versions = Channel.empty()
     // ch_multiqc_files = Channel.empty()
 
-    ch_lookup_table = Channel.fromPath( "$baseDir/conf/lookup_table.tsv" )
+    ch_lookup_table = Channel.fromPath( params.lookup_table )
         .splitCsv( sep: "\t" ) 
         .map { row -> [[ row[0], row[1], row[2] ]] } // genus, species, genome_size
 
