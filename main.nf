@@ -44,7 +44,7 @@ workflow NCEZID_BIOME_STYLO {
 
     emit:
     versions = STYLO.out.versions
-    // multiqc_report = STYLO.out.multiqc_report // channel: /path/to/multiqc_report.html
+    multiqc_report = STYLO.out.multiqc_report // channel: /path/to/multiqc_report.html
 
 }
 /*
@@ -87,8 +87,7 @@ workflow {
         params.outdir,
         params.monochrome_logs,
         params.hook_url,
-        []
-        // NCEZID_BIOME_STYLO.out.multiqc_report
+        NCEZID_BIOME_STYLO.out.multiqc_report
     )
 }
 

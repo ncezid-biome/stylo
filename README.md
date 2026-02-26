@@ -50,7 +50,7 @@ Now, you can run the pipeline using:
 
 ```bash
 nextflow run ncezid-biome/stylo \
-   -r v1.3.1 \
+   -r v1.3.2 \
    -profile singularity \
    --input samplesheet.csv \
    --outdir <OUTDIR>
@@ -59,12 +59,22 @@ nextflow run ncezid-biome/stylo \
 > [!NOTE]
 > For CDC users, please see [CDC Usage](docs/CDC.md)
 
-
 > [!WARNING]
 > Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_;
 > see [docs](https://nf-co.re/usage/configuration#custom-configuration-files).
 
 For more details about usage see the [Usage Page](docs/usage.md)
+
+## Testing stylo on your server
+
+If you'd like to test stylo on your server, you can run the following command
+
+```bash
+nextflow run ncezid-biome/stylo \
+   -r v1.3.2 \
+   -profile test,singularity \
+   --outdir stylo_test/
+```
 
 ## Credits
 

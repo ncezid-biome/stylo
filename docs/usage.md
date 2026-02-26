@@ -48,7 +48,7 @@ sample3,/path/to/sample3.fastq.gz,Bacteroides,fragilis,5.2m
 The typical command for running the pipeline is as follows:
 
 ```bash
-nextflow run ncezid-biome/stylo -r v1.3.1 --input /path/to/samplesheet.csv --outdir ./results -profile singularity
+nextflow run ncezid-biome/stylo -r v1.3.2 --input /path/to/samplesheet.csv --outdir ./results -profile singularity
 ```
 
 This will launch the pipeline with the `singularity` configuration profile. See below for more information about profiles.

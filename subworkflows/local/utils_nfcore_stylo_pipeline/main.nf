@@ -164,8 +164,12 @@ def toolCitationText() {
     // Uncomment function in methodsDescriptionText to render in MultiQC report
     def citation_text = [
             "Tools used in the workflow included:",
-            "FastQC (Andrews 2010),",
-            "MultiQC (Ewels et al. 2016)",
+            "Dnaapler (Bouras et al. 2024),",
+            "Flye (Kolmogorov et al. 2019),",
+            "Medaka (2024),",
+            "MultiQC (Ewels et al. 2016),",
+            "Nanoq (Steinig et al. 2022),",
+            "QUAST (Mikheenko et al. 2018)",
             "."
         ].join(' ').trim()
 
@@ -177,8 +181,24 @@ def toolBibliographyText() {
     // Can use ternary operators to dynamically construct based conditions, e.g. params["run_xyz"] ? "<li>Author (2023) Pub name, Journal, DOI</li>" : "",
     // Uncomment function in methodsDescriptionText to render in MultiQC report
     def reference_text = [
-            "<li>Andrews S, (2010) FastQC, URL: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).</li>",
-            "<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics , 32(19), 3047–3048. doi: /10.1093/bioinformatics/btw354</li>"
+            "<li>B Tolar, L A Joseph, M N Schroeder, S Stroika, E M Ribot, K B Hise, & P Gerner-Smidt. (2019). An overview of PulseNet USA databases. Foodborne Pathogens and Disease, 16(7), 457–462. <a href=\"https://doi.org/10.1089/fpd.2019.2637\">10.1089/fpd.2019.2637</a></li>",
+            "<li>Bouras, G., Grigson, S. R., Papudeshi, B., Mallawaarachchi, V., & Roach, M. J. (2024). Dnaapler: A tool to reorient circular microbial genomes. Journal of Open Source Software, 9(93), 5968. <a href=\"https://doi.org/10.21105/joss.05968\">10.21105/joss.05968</a></li>",
+            "<li>E M Ribot, & K B Hise. (2016). Future challenges for tracking foodborne diseases. EMBO Rep., 17(11), 1499–1505. <a href=\"https://doi.org/10.15252/embr.201643128\">10.15252/embr.201643128</a></li>",
+            "<li>E Steinig, & L Coin. (2022). Nanoq: Ultra-fast quality control for nanopore reads. Journal of 69 Open Source Software, 7(69), 2991. <a href=\"https://doi.org/10.21105/joss.02991\">10.21105/joss.02991</a></li>",
+            "<li>E Young, & K Florek. (2025). Donut falls. In GitHub repository. GitHub. <a href=\"https://github.com/UPHL-BioNGS/Donut_Falls\">UPHL-BioNGS/Donut_Falls</a></li>",
+            "<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics , 32(19), 3047–3048. <a href=\"https://doi.org/10.1093/bioinformatics/btw354\">10.1093/bioinformatics/btw354</a></li>",
+            "<li>H H Mostafa. (2024). An evolution of nanopore next-generation sequencing technology: Implications for medical microbiology and public health. Journal of Clinical Microbiology, 62(5), e00246–24. <a href=\"https://doi.org/10.1128/jcm.00246-24\">10.1128/jcm.00246-24</a></li>",
+            "<li>M B Hall. (2022). Rasusa: Randomly subsample sequencing reads to a specified coverage. Journal of Open Source Software, 7(69), 3941. <a href=\"https://doi.org/10.21105/joss.03941\">10.21105/joss.03941</a></li>",
+            "<li>M Kolmogorov, J Yuan, Y Lin, & P A Pevzner. (2019). Assembly of long, error-prone reads using repeat graphs. Nature Biotechnology, 37, 540–546. <a href=\"https://doi.org/10.1038/s41587-019-0072-8\">10.1038/s41587-019-0072-8</a></li>",
+            "<li>Medaka. (2024). In GitHub repository. GitHub. <a href=\"https://github.com/nanoporetech/medaka\">nanoporetech/medaka</a></li>",
+            "<li>Mikheenko, A., Prjibelski, A., Saveliev, V., Antipov, D., & Gurevich, A. (2018). Versatile genome assembly evaluation with QUAST-LG. Bioinformatics, 34(13), i142–i150. <a href=\"https://doi.org/10.1093/bioinformatics/bty266\">10.1093/bioinformatics/bty266</a></li>",
+            "<li>N D Sanderson, K M V Hopkins, M Colpus, M Parker, S Lipworth, D Crook, & N Stoesser. (2024). Evaluation of the accuracy of bacterial genome reconstruction with oxford nanopore R10.4.1 long-read-only sequencing [Journal Article]. Microbial Genomics, 10(5). <a href=\"https://doi.org/10.1099/mgen.0.001246\">10.1099/mgen.0.001246</a></li>",
+            "<li>P A Ewels, A Peltzer, S Fillinger, H Patel, J Alneberg, A Wilm, M U Garcia, P Di Tommaso, & S Nahnsen. (2020). The nf-core framework for community-curated bioinformatics pipelines. Nature Biotechnology, 38, 276–278. <a href=\"https://doi.org/10.1038/s41587-020-0439-x\">10.1038/s41587-020-0439-x</a></li>",
+            "<li>P Di Tommaso, M Chatzou, E W Floden, P P Barja, E Palumbo, & C Notredame. (2017). Nextflow enables reproducible computational workflows. Nature Biotechnology, 35, 316–319. <a href=\"https://doi.org/10.1038/nbt.3820\">10.1038/nbt.3820</a></li>",
+            "<li>P Gerner-Smidt, K Hise, J Kincaid, S Hunter, S Rolando, E Hyytiä-Trees, E M Ribot, & B Swaminathan. (2006). PulseNet USA: A five-year update. Foodborne Pathogens and Disease, 3(1), 9–19. <a href=\"https://doi.org/10.1089/fpd.2006.3.9\">10.1089/fpd.2006.3.9</a></li>",
+            "<li>R E Timme, H Rand, M Shumway, E K Trees, M Simmons, R Agarwala, S Davis, G E Tillman, S Defibaugh-Chavez, H A Carleton, W A Klimke, & L S Katz. (2017). Benchmark datasets for phylogenomic pipeline validation, applications for foodborne pathogen surveillance. PeerJ, 5(e3893), e3893. <a href=\"https://doi.org/10.7717/peerj.3893\">10.7717/peerj.3893</a></li>",
+            "<li>The Galaxy Community , The Galaxy platform for accessible, reproducible, and collaborative data analyses: 2024 update, Nucleic Acids Research, Volume 52, Issue W1, 5 July 2024, Pages W83–W94, <a href=\"https://doi.org/10.1093/nar/gkae410\">10.1093/nar/gkae410</a></li>",
+            "<li>Wave containers. (2022). In GitHub repository. GitHub. <a href=\"https://github.com/seqeralabs/wave\">seqeralabs/wave</a></li>",
         ].join(' ').trim()
 
     return reference_text
@@ -207,8 +227,8 @@ def methodsDescriptionText(mqc_methods_yaml) {
     meta["tool_bibliography"] = ""
 
     // TODO nf-core: Only uncomment below if logic in toolCitationText/toolBibliographyText has been filled!
-    // meta["tool_citations"] = toolCitationText().replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
-    // meta["tool_bibliography"] = toolBibliographyText()
+    meta["tool_citations"] = toolCitationText().replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
+    meta["tool_bibliography"] = toolBibliographyText()
 
 
     def methods_text = mqc_methods_yaml.text

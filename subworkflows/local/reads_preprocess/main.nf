@@ -25,6 +25,7 @@ workflow READS_PREPROCESSING {
     main:
 
     ch_versions = Channel.empty()
+    ch_multiqc_files = Channel.empty()
 
     //
     // MODULE: readfiltering ONT longreads
@@ -34,6 +35,7 @@ workflow READS_PREPROCESSING {
         params.nanoq_format
     )
     ch_versions = ch_versions.mix(NANOQ.out.versions)
+    ch_multiqc_files = ch_multiqc_files.mix(NANOQ.out.stats.map{ meta, stats -> tuple (stats) })
 
     //
     // MODULE: downsampling to specific coverage
@@ -50,4 +52,5 @@ workflow READS_PREPROCESSING {
     emit:
     reads = RASUSA.out.reads
     versions = ch_versions
+    multiqc_files = ch_multiqc_files
 }

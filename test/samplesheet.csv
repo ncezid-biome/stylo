@@ -1,0 +1,2 @@
+sample,fastq,genus,species,genome_size
+2020C-3150_IncPlasmid,https://github.com/ncezid-biome/stylo/raw/refs/heads/dev/test/2020C-3150_IncPlasmid_q25.fastq.gz,plasmid,-,80k
