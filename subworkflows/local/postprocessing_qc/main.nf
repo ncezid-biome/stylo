@@ -27,6 +27,7 @@ workflow POSTPROCESSING_QC {
     main:
 
     ch_versions = Channel.empty()
+    ch_multiqc_files = Channel.empty()
 
     //
     // MODULE: fix starting position of genome assemblies
@@ -55,7 +56,9 @@ workflow POSTPROCESSING_QC {
         [[],[]],
     )
     ch_versions = ch_versions.mix(QUAST.out.versions)
+    ch_multiqc_files = ch_multiqc_files.mix(QUAST.out.results.map{ meta, results -> tuple (results) } )
 
     emit:
     versions = ch_versions
+    multiqc_files = ch_multiqc_files
 }

@@ -50,7 +50,7 @@ Now, you can run the pipeline using:
 
 ```bash
 nextflow run ncezid-biome/stylo \
-   -r v1.3.1 \
+   -r v1.3.2 \
    -profile singularity \
    --input samplesheet.csv \
    --outdir <OUTDIR>
@@ -71,7 +71,7 @@ If you'd like to test stylo on your server, you can run the following command
 
 ```bash
 nextflow run ncezid-biome/stylo \
-   -r v1.3.1 \
+   -r v1.3.2 \
    -profile test,singularity \
    --outdir stylo_test/
 ```
