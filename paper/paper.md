@@ -68,7 +68,7 @@ Since stylo is lightweight, it can be run in automated disease surveillance sett
 
 4. Post-processing and Quality Control: The pipeline uses "dnaapler all" to reorient contigs to begin at a specific genes. The pipeline then uses Medaka to correct assembly sequences. Finally, the assembly quality is assessed via QUAST with the following speedup options: "--no-check", "--no-plots", "--no-html", "--no-icarus", "--no-snps", "--no-sv".
 
-5. Output: The pipeline outputs files for each step. Some key files are the assembly by Flye, the final corrected assembly by Medaka, and the quality control summary by QUAST.
+5. Output: The pipeline outputs files for each step. Some key files are the assembly by Flye, the final corrected assembly by Medaka, and the quality control summary by QUAST. Additionally, MultiQC is run to generate an html report summarizing nanoq and QUAST outputs. 
 
 ![Diagram of stylo steps.](stylo_tubemap.png)
 
