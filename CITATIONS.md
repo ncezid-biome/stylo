@@ -34,9 +34,9 @@
 
   > George Bouras, Susanna R. Grigson, Bhavya Papudeshi, Vijini Mallawaarachchi, Michael J. Roach (2024). Dnaapler: A tool to reorient circular microbial genomes. Journal of Open Source Software, 9(93), 5968, https://doi.org/10.21105/joss.05968
 
-- [Medaka](https://github.com/nanoporetech/medaka)
+- [Dorado](https://github.com/nanoporetech/dorado)
 
-  > Medaka. Github. (2024). https://github.com/nanoporetech/medaka
+  > Dorado. Github. (2022). https://github.com/nanoporetech/dorado
 
 - [QUAST](https://academic.oup.com/bioinformatics/article/34/13/i142/5045727)
 

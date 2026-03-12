@@ -4,8 +4,8 @@ description: |
     <li>Input: stylo requires a comma separated value file with columns for sample, fastq, genus, and species. Fastq files must comprise of long-reads generated on an ONT instrument. Genus and species are used to automatically determine genome size via a lookup table built into the pipeline.</li>
     <li>Filtering and Downsampling: The pipeline filters out reads that are less than a user provided minimum length using nanoq. The resulting fastq is then subsampled to a user provided coverage via Rasusa.</li>
     <li>Assembly: Flye is run on the subsampled fastq using the "--nano-hq" mode by default, expecting high-quality ONT reads. This parameter can be changed by the user.</li>
-    <li>Post-processing and Quality Control: The pipeline uses "dnaapler all" to reorient contigs to begin at a specific genes. The pipeline then uses Medaka to correct assembly sequences. Finally, the assembly quality is assessed via QUAST with the following speedup options: "--no-check", "--no-plots", "--no-html", "--no-icarus", "--no-snps", "--no-sv".</li>
-    <li>Output: The pipeline outputs files for each step. Some key files are the assembly by Flye, the final corrected assembly by Medaka, and the quality control summary by QUAST.</li>
+    <li>Post-processing and Quality Control: The pipeline uses "dnaapler all" to reorient contigs to begin at a specific genes. The pipeline then uses "dorado polish" using "--bacteria" to correct assembly sequences. Finally, the assembly quality is assessed via QUAST with the following speedup options: "--no-check", "--no-plots", "--no-html", "--no-icarus", "--no-snps", "--no-sv".</li>
+    <li>Output: The pipeline outputs files for each step. Some key files are the assembly by Flye, the final corrected assembly by Dorado, and the quality control summary by QUAST.</li>
   </ol>
 section_name: "ncezid-biome/stylo Methods Description"
 section_href: "https://github.com/ncezid-biome/stylo"

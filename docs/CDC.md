@@ -11,3 +11,5 @@ nextflow run ncezid-biome/stylo \
    --input samplesheet.csv \
    --outdir <OUTDIR>
 ```
+
+Note: on CDC servers the work dir will be in the scratch space

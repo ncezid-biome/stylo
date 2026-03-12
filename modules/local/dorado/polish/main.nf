@@ -10,8 +10,8 @@ process DORADO_POLISH {
 
     output:
     tuple val(meta), path("*_polished.fasta.gz")    , emit: assembly
-    tuple val(meta), path("*_model.log")                     , emit: model
-    path "versions.yml"                                      , emit: versions
+    tuple val(meta), path("*_model.log")            , emit: model
+    path "versions.yml"                             , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -20,9 +20,10 @@ process DORADO_POLISH {
     def args = task.ext.args ?: ''
     def args2 = task.ext.args2 ?: ''
     def args3 = task.ext.args3 ?: ''
+    def args4 = task.ext.args4 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    mkdir -p $dorado_model_dir
+    mkdir -p \$(readlink $model_dir)
 
     #https://software-docs.nanoporetech.com/dorado/latest/assembly/polish/
     # Align reads to a reference using dorado aligner, sort and index
@@ -78,13 +79,12 @@ process DORADO_POLISH {
     gzip -n ${prefix}_polished.fasta
 
     # write basecall and polishing model to model log
-    echo basecall_model: $(samtools view -H GI-01_sup_5.0.0_small.bam | grep "^@RG" | tr ' ' '\n' | grep "basecall_model=" | cut -f 2 -d '=') > ${prefix}_model.log
-    echo polishing_model: $(grep "Resolved model from input data: " ${prefix}.log | rev | cut -f 1 -d ' ' | rev) >> ${prefix}_model.log
+    echo "basecall_model: \$(samtools view -H ${prefix}_sorted.bam | grep "^@RG" | tr ' ' '\\n' | grep "basecall_model=" | cut -f 2 -d '=')" > ${prefix}_model.log
+    echo "polishing_model: \$(grep "Resolved model from input data: " ${prefix}.log | rev | cut -f 1 -d ' ' | rev)" >> ${prefix}_model.log
 
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        dorado: \$( dorado --version )
-        samtools: \$( samtools --version | head -n 1 | cut -f 2 -d ' ' )
-    END_VERSIONS
+    # docker file does not support heredocs
+    echo "${task.process}:" > versions.yml
+    echo "    dorado: \$( dorado --version )" >> versions.yml
+    echo "    samtools: \$( samtools --version | head -n 1 | cut -f 2 -d ' ' )" >> versions.yml
     """
 }
