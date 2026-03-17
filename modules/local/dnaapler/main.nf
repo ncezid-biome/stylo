@@ -4,7 +4,7 @@ process DNAAPLER {
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/dnaapler%3A1.2.0--pyhdfd78af_0' :
-        'community.wave.seqera.io/library/dnaapler:1.2.0--d4882d19d1c147a7' }"
+        'quay.io/biocontainers/dnaapler:1.2.0--pyhdfd78af_0' }"
 
     input:
     tuple val(meta), path(assembly)
