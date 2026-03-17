@@ -8,7 +8,7 @@
 2. Downsamples reads to specific coverage ([rasusa](https://github.com/mbhall88/rasusa))
 3. Assembles reads ([Flye](https://github.com/mikolmogorov/Flye))
 4. Reorients assembly ([Dnaapler](https://github.com/gbouras13/dnaapler))
-5. Error correction ([Medaka](https://github.com/nanoporetech/medaka))
+5. Error correction ([Dorado polish](https://github.com/nanoporetech/dorado))
 6. QCs assembly ([QUAST](https://github.com/ablab/quast))
 
 ## Usage
@@ -50,7 +50,7 @@ Now, you can run the pipeline using:
 
 ```bash
 nextflow run ncezid-biome/stylo \
-   -r v1.3.2 \
+   -r v1.4.0 \
    -profile singularity \
    --input samplesheet.csv \
    --outdir <OUTDIR>
@@ -71,7 +71,7 @@ If you'd like to test stylo on your server, you can run the following command
 
 ```bash
 nextflow run ncezid-biome/stylo \
-   -r v1.3.2 \
+   -r v1.4.0 \
    -profile test,singularity \
    --outdir stylo_test/
 ```

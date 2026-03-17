@@ -291,12 +291,12 @@
         "model": {
             "type": "string",
             "default": "",
-            "description": "medaka model used for polishing your assembly. Its best to leave this blank and let the pipeline use the bacterial methylation model (r1041_e82_400bps_bacterial_methylation). See README for full list of models",
+            "description": "dorado model used for polishing your assembly. If your input fastq header does not have a basecaller listed, this is the model that gets used by dorado polish. Otherwise dorado polish will choose the best model automatically. See README for full list of models",
         },
         "model_dir": {
             "type": "string",
-            "default": "$HOME/.medaka/data/",
-            "description": "medaka model directory, this is where medaka looks for models",
+            "default": "$HOME/.dorado/models",
+            "description": "dorado model directory, this is where dorado looks for models",
             "hidden": true
         },
         "lookup_table" : {

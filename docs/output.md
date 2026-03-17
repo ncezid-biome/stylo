@@ -14,7 +14,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - [Rasusa](#rasusa) - Read Downsampling
 - [Flye](#flye) - Assembly
 - [Dnaapler](#dnaapler) - Reorientation of contigs
-- [Medaka](#medaka) - Assembly error correction
+- [Dorado polish](#dorado-polish) - Assembly error correction
 - [QUAST](#quast) - Assembly QC
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
 
@@ -75,17 +75,18 @@ Fast and accurate de novo assembler for single molecule sequencing reads. For fu
 
 For further reading and documentation see [dnaapler usage](https://github.com/gbouras13/dnaapler?tab=readme-ov-file#usage).
 
-### Medaka
+### Dorado polish
 
 <details markdown="1">
 <summary>Output files</summary>
 
-- `medaka/`
-  - `*.fa.gz`: Error corrected assembly
+- `dorado_polish/`
+  - `*_model.log`: basecall and polish models used
+  - `*.fasta.gz`: Error corrected assembly
 
 </details>
 
-Neural network sequence error correction. For further reading and documentation see [medaka usage](https://github.com/nanoporetech/medaka?tab=readme-ov-file#usage).
+Neural network sequence error correction. For further reading and documentation see [dorado usage](https://software-docs.nanoporetech.com/dorado/latest/).
 
 ### QUAST
 

@@ -5,9 +5,11 @@ This will allow you to leverage the Rosalind HPC when running stylo. You should 
 
 ```bash
 nextflow run ncezid-biome/stylo \
-   -r v1.3.2 \
+   -r v1.4.0 \
    -c /scicomp/reference-pure/nextflow/nextflow-configs/latest.scicomp.config \
    -profile scicomp_rosalind,singularity \
    --input samplesheet.csv \
    --outdir <OUTDIR>
 ```
+
+Note: on CDC servers the work dir will be in the scratch space

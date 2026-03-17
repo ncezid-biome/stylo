@@ -9,7 +9,7 @@
 */
 
 include { DNAAPLER           } from '../../../modules/local/dnaapler/main'
-include { MEDAKA             } from '../../../modules/nf-core/medaka/main'
+include { DORADO_POLISH      } from '../../../modules/local/dorado/polish/main'
 include { QUAST              } from '../../../modules/nf-core/quast/main'
 
 /*
@@ -40,18 +40,18 @@ workflow POSTPROCESSING_QC {
     //
     // MODULE: create consensus sequences
     //
-    MEDAKA (
+    DORADO_POLISH (
         ch_processed_reads.combine(DNAAPLER.out.assembly, by:0),
         params.model_dir
     )
-    ch_versions = ch_versions.mix(MEDAKA.out.versions)
+    ch_versions = ch_versions.mix(DORADO_POLISH.out.versions)
     
 
     //
     // MODULE: qc assembly
     //
     QUAST (
-        MEDAKA.out.assembly,
+        DORADO_POLISH.out.assembly,
         [[],[]],
         [[],[]],
     )

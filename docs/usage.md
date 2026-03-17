@@ -48,7 +48,7 @@ sample3,/path/to/sample3.fastq.gz,Bacteroides,fragilis,5.2m
 The typical command for running the pipeline is as follows:
 
 ```bash
-nextflow run ncezid-biome/stylo -r v1.3.2 --input /path/to/samplesheet.csv --outdir ./results -profile singularity
+nextflow run ncezid-biome/stylo -r v1.4.0 --input /path/to/samplesheet.csv --outdir ./results -profile singularity
 ```
 
 This will launch the pipeline with the `singularity` configuration profile. See below for more information about profiles.
@@ -100,58 +100,24 @@ If the model parameter is left blank, the pipeline will choose the bacterial met
 It's best to let the pipleine use the bacterial methylation model, but if you must specify the model parameter make sure to use one of the models from the following list
 
 ```
-r103_sup_g507
-r1041_e82_260bps_fast_g632
-r1041_e82_260bps_hac_g632
-r1041_e82_260bps_hac_v4.0.0
-r1041_e82_260bps_hac_v4.1.0
-r1041_e82_260bps_joint_apk_ulk_v5.0.0
-r1041_e82_260bps_sup_g632
-r1041_e82_260bps_sup_v4.0.0
-r1041_e82_260bps_sup_v4.1.0
-r1041_e82_400bps_bacterial_methylation
-r1041_e82_400bps_fast_g615
-r1041_e82_400bps_fast_g632
-r1041_e82_400bps_hac_g615
-r1041_e82_400bps_hac_g632
-r1041_e82_400bps_hac_v4.0.0
-r1041_e82_400bps_hac_v4.1.0
-r1041_e82_400bps_hac_v4.2.0
-r1041_e82_400bps_hac_v4.3.0
-r1041_e82_400bps_hac_v5.0.0
-r1041_e82_400bps_hac_v5.0.0_rl_lstm384_dwells
-r1041_e82_400bps_hac_v5.0.0_rl_lstm384_no_dwells
-r1041_e82_400bps_hac_v5.2.0
-r1041_e82_400bps_hac_v5.2.0_rl_lstm384_dwells
-r1041_e82_400bps_hac_v5.2.0_rl_lstm384_no_dwells
-r1041_e82_400bps_sup_g615
-r1041_e82_400bps_sup_v4.0.0
-r1041_e82_400bps_sup_v4.1.0
-r1041_e82_400bps_sup_v4.2.0
-r1041_e82_400bps_sup_v4.3.0
-r1041_e82_400bps_sup_v5.0.0
-r1041_e82_400bps_sup_v5.0.0_rl_lstm384_dwells
-r1041_e82_400bps_sup_v5.0.0_rl_lstm384_no_dwells
-r1041_e82_400bps_sup_v5.2.0
-r1041_e82_400bps_sup_v5.2.0_rl_lstm384_dwells
-r1041_e82_400bps_sup_v5.2.0_rl_lstm384_no_dwells
-r104_e81_fast_g5015
-r104_e81_hac_g5015
-r104_e81_sup_g5015
-r104_e81_sup_g610
-r941_e81_fast_g514
-r941_e81_hac_g514
-r941_e81_sup_g514
-r941_min_fast_g507
-r941_min_hac_g507
-r941_min_sup_g507
-r941_prom_fast_g507
-r941_prom_hac_g507
-r941_prom_sup_g507
+dna_r10.4.1_e8.2_400bps_fast@v5.2.0
+dna_r10.4.1_e8.2_400bps_hac@v5.2.0
+dna_r10.4.1_e8.2_400bps_sup@v5.2.0
+dna_r10.4.1_e8.2_400bps_fast@v5.0.0
+dna_r10.4.1_e8.2_400bps_hac@v5.0.0
+dna_r10.4.1_e8.2_400bps_sup@v5.0.0
+dna_r10.4.1_e8.2_400bps_fast@v4.3.0
+dna_r10.4.1_e8.2_400bps_hac@v4.3.0
+dna_r10.4.1_e8.2_400bps_sup@v4.3.0
+dna_r10.4.1_e8.2_400bps_fast@v4.2.0
+dna_r10.4.1_e8.2_400bps_hac@v4.2.0
+dna_r10.4.1_e8.2_400bps_sup@v4.2.0
 ```
 
-for more details about model selection in medaka, see [medaka model documentation](https://github.com/nanoporetech/medaka/tree/366ff49ad9e2be6862e376630b51b3b3d28944c2#models)
+for more details about model selection in dorado, see [dorado model documentation](https://software-docs.nanoporetech.com/dorado/latest/models/models/)
 
+> [!NOTE]
+> by default stylo downloads and looks for models to `$HOME/.dorado/models`. This can be changed using the parameter `--model_dir`.
 
 ## Core Nextflow arguments
 
@@ -176,8 +142,8 @@ If `-profile` is not specified, the pipeline will run locally and expect all sof
 
 - `singularity`
   - A generic configuration profile to be used with [Singularity](https://sylabs.io/docs/)
-- `rosalind`
-  - A CDC server specific configuration profile for running jobs on the cluster using [Singularity](https://sylabs.io/docs/)
+- `docker`
+  - A generic configuration profile to be used with [Docker](https://docs.docker.com/)
 
 ### `-resume`
 
