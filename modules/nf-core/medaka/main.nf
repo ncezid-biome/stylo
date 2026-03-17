@@ -3,8 +3,8 @@ process MEDAKA {
     label 'process_high'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/medaka%3A2.1.1--py312ha65e1bd_0' :
-        'biocontainers/medaka%3A2.1.1--py312ha65e1bd_0' }"
+        'https://depot.galaxyproject.org/singularity/medaka:2.1.1--py312ha65e1bd_0' :
+        'biocontainers/medaka:2.1.1--py312ha65e1bd_0' }"
 
     input:
     tuple val(meta), path(reads), path(assembly)
@@ -27,7 +27,7 @@ process MEDAKA {
         $args \\
         -i $reads \\
         -d $assembly \\
-        -o ./ > ${prefix}.log 2>&1
+        -o ./ 2>&1 | tee ${prefix}.log
 
     mv consensus.fasta ${prefix}.fa
 
