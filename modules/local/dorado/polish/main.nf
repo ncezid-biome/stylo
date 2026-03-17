@@ -51,7 +51,7 @@ process DORADO_POLISH {
             ${prefix}_sorted.bam \\
             $assembly \\
             > ${prefix}_polished.fasta \\
-            2> ${prefix}.log
+            2> >(tee ${prefix}.log >&2)
     else
         # add DS tagged RG so dorado polish runs
         samtools addreplacerg \\
@@ -73,7 +73,7 @@ process DORADO_POLISH {
             ${prefix}_sorted.bam \\
             $assembly \\
             > ${prefix}_polished.fasta \\
-            2> ${prefix}.log
+            2> >(tee ${prefix}.log >&2)
     fi
 
     gzip -n ${prefix}_polished.fasta

@@ -116,6 +116,8 @@ dna_r10.4.1_e8.2_400bps_sup@v4.2.0
 
 for more details about model selection in dorado, see [dorado model documentation](https://software-docs.nanoporetech.com/dorado/latest/models/models/)
 
+> [!NOTE]
+> by default stylo downloads and looks for models to `$HOME/.dorado/models`. This can be changed using the parameter `--model_dir`.
 
 ## Core Nextflow arguments
 
