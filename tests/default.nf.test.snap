@@ -1,0 +1,140 @@
+{
+    "-profile test": {
+        "content": [
+            7,
+            {
+                "DNAAPLER": {
+                    "dnaapler": "1.2.0"
+                },
+                "DORADO_POLISH": {
+                    "dorado": "1.4.0+ba44a013",
+                    "samtools": "1.19.2"
+                },
+                "FLYE": {
+                    "flye": "2.9.5-b1801"
+                },
+                "NANOQ": {
+                    "nanoq": "0.10.0"
+                },
+                "QUAST": {
+                    "quast": "5.3.0"
+                },
+                "RASUSA": {
+                    "rasusa": "0.3.0"
+                },
+                "Workflow": {
+                    "ncezid-biome/stylo": "v1.4.0"
+                }
+            },
+            [
+                "dnaapler",
+                "dnaapler/2020C-3150_IncPlasmid_MMseqs2_output.txt",
+                "dnaapler/2020C-3150_IncPlasmid_all_reorientation_summary.tsv",
+                "dnaapler/2020C-3150_IncPlasmid_dnaapler.log",
+                "dnaapler/2020C-3150_IncPlasmid_reoriented.fasta",
+                "dorado_polish",
+                "dorado_polish/2020C-3150_IncPlasmid_model.log",
+                "dorado_polish/2020C-3150_IncPlasmid_polished.fasta.gz",
+                "flye",
+                "flye/2020C-3150_IncPlasmid.assembly.fasta.gz",
+                "flye/2020C-3150_IncPlasmid.assembly_graph.gfa.gz",
+                "flye/2020C-3150_IncPlasmid.assembly_graph.gv.gz",
+                "flye/2020C-3150_IncPlasmid.assembly_info.txt",
+                "flye/2020C-3150_IncPlasmid.flye.log",
+                "flye/2020C-3150_IncPlasmid.params.json",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_data/llms-full.txt",
+                "multiqc/multiqc_data/multiqc.log",
+                "multiqc/multiqc_data/multiqc.parquet",
+                "multiqc/multiqc_data/multiqc_citations.txt",
+                "multiqc/multiqc_data/multiqc_data.json",
+                "multiqc/multiqc_data/multiqc_general_stats.txt",
+                "multiqc/multiqc_data/multiqc_nanoq.txt",
+                "multiqc/multiqc_data/multiqc_quast.txt",
+                "multiqc/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/multiqc_data/multiqc_sources.txt",
+                "multiqc/multiqc_data/nanoq_plot_length_plot.txt",
+                "multiqc/multiqc_data/nanoq_plot_quality_plot.txt",
+                "multiqc/multiqc_data/nanoq_table.txt",
+                "multiqc/multiqc_data/quast_num_contigs.txt",
+                "multiqc/multiqc_data/quast_table.txt",
+                "multiqc/multiqc_plots",
+                "multiqc/multiqc_plots/pdf",
+                "multiqc/multiqc_plots/pdf/nanoq_plot_length_plot-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/nanoq_plot_length_plot-pct.pdf",
+                "multiqc/multiqc_plots/pdf/nanoq_plot_quality_plot-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/nanoq_plot_quality_plot-pct.pdf",
+                "multiqc/multiqc_plots/pdf/nanoq_table.pdf",
+                "multiqc/multiqc_plots/pdf/quast_num_contigs-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/quast_num_contigs-pct.pdf",
+                "multiqc/multiqc_plots/pdf/quast_table.pdf",
+                "multiqc/multiqc_plots/png",
+                "multiqc/multiqc_plots/png/nanoq_plot_length_plot-cnt.png",
+                "multiqc/multiqc_plots/png/nanoq_plot_length_plot-pct.png",
+                "multiqc/multiqc_plots/png/nanoq_plot_quality_plot-cnt.png",
+                "multiqc/multiqc_plots/png/nanoq_plot_quality_plot-pct.png",
+                "multiqc/multiqc_plots/png/nanoq_table.png",
+                "multiqc/multiqc_plots/png/quast_num_contigs-cnt.png",
+                "multiqc/multiqc_plots/png/quast_num_contigs-pct.png",
+                "multiqc/multiqc_plots/png/quast_table.png",
+                "multiqc/multiqc_plots/svg",
+                "multiqc/multiqc_plots/svg/nanoq_plot_length_plot-cnt.svg",
+                "multiqc/multiqc_plots/svg/nanoq_plot_length_plot-pct.svg",
+                "multiqc/multiqc_plots/svg/nanoq_plot_quality_plot-cnt.svg",
+                "multiqc/multiqc_plots/svg/nanoq_plot_quality_plot-pct.svg",
+                "multiqc/multiqc_plots/svg/nanoq_table.svg",
+                "multiqc/multiqc_plots/svg/quast_num_contigs-cnt.svg",
+                "multiqc/multiqc_plots/svg/quast_num_contigs-pct.svg",
+                "multiqc/multiqc_plots/svg/quast_table.svg",
+                "multiqc/multiqc_report.html",
+                "nanoq",
+                "nanoq/2020C-3150_IncPlasmid_filtered.fastq.gz",
+                "nanoq/2020C-3150_IncPlasmid_filtered.stats",
+                "pipeline_info",
+                "quast",
+                "quast/2020C-3150_IncPlasmid",
+                "quast/2020C-3150_IncPlasmid.tsv",
+                "quast/2020C-3150_IncPlasmid/basic_stats",
+                "quast/2020C-3150_IncPlasmid/quast.log",
+                "quast/2020C-3150_IncPlasmid/report.tex",
+                "quast/2020C-3150_IncPlasmid/report.tsv",
+                "quast/2020C-3150_IncPlasmid/report.txt",
+                "quast/2020C-3150_IncPlasmid/transposed_report.tex",
+                "quast/2020C-3150_IncPlasmid/transposed_report.tsv",
+                "quast/2020C-3150_IncPlasmid/transposed_report.txt",
+                "rasusa",
+                "rasusa/2020C-3150_IncPlasmid.fastq.gz"
+            ],
+            [
+                "2020C-3150_IncPlasmid_all_reorientation_summary.tsv:md5,050438872e779ae101b065019c7f8891",
+                "2020C-3150_IncPlasmid_reoriented.fasta:md5,58c892c8fe0b12bb9b8133b81e91405a",
+                "2020C-3150_IncPlasmid_polished.fasta.gz:md5,3751c427f977965978621ef7b91637b7",
+                "2020C-3150_IncPlasmid.assembly.fasta.gz:md5,78dabd0848caeb002543afc56ec5779f",
+                "2020C-3150_IncPlasmid.assembly_graph.gfa.gz:md5,7e915805896d9842994cb7c792885679",
+                "2020C-3150_IncPlasmid.assembly_graph.gv.gz:md5,45387b063a11d499d775e474820ed061",
+                "nanoq_plot_length_plot-cnt.png:md5,3606735dc205f0cc613d914f69d4783a",
+                "nanoq_plot_length_plot-pct.png:md5,76a447ebb14984cab69b0a27799e86ef",
+                "nanoq_plot_quality_plot-cnt.png:md5,f51e04ccaeb1cba56f7c2a97215ef161",
+                "nanoq_plot_quality_plot-pct.png:md5,9d6dd34cdabab4bb5e1e222a90a1ff54",
+                "nanoq_table.png:md5,c1073bb108a279c0e938034f89b0fb59",
+                "quast_num_contigs-cnt.png:md5,1502f13d9f179f0a72c4d6da1508ea32",
+                "quast_num_contigs-pct.png:md5,faa78274b74333e16edab76a76d8fd20",
+                "quast_table.png:md5,c406bd49843ec0bb44858b614d5c92ea",
+                "2020C-3150_IncPlasmid_filtered.fastq.gz:md5,eeec011b63b432c087e27aeafe5f4a31",
+                "2020C-3150_IncPlasmid_filtered.stats:md5,09d8ea7f61476324c1f006deba92799d",
+                "2020C-3150_IncPlasmid.tsv:md5,df93322c3268274bbf8ec45eb59c76ae",
+                "report.tex:md5,8f20f30ba76f919577d710f78c9d8444",
+                "report.tsv:md5,df93322c3268274bbf8ec45eb59c76ae",
+                "transposed_report.tex:md5,d71625d27d0aff200c777d726a4df717",
+                "transposed_report.tsv:md5,86c07d548effe9bca7f96b29e8751d5f",
+                "2020C-3150_IncPlasmid.fastq.gz:md5,eeec011b63b432c087e27aeafe5f4a31"
+            ]
+        ],
+        "timestamp": "2026-03-23T23:33:38.222620306",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    }
+}
