@@ -136,5 +136,26 @@
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
         }
+    },
+    "-profile test,singularity": {
+        "content": [
+            0,
+            {
+                "Workflow": {
+                    "ncezid-biome/stylo": "v1.4.0"
+                }
+            },
+            [
+                "pipeline_info"
+            ],
+            [
+                
+            ]
+        ],
+        "timestamp": "2026-03-27T16:57:41.432388423",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
     }
 }

@@ -11,3 +11,4 @@ temp.txt
 assets/Thumbs.db
 .nf-test/
 .nf-test.log
+tests/default.nf.test.snap
