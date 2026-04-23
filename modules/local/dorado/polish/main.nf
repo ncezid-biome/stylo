@@ -54,6 +54,7 @@ process DORADO_POLISH {
             2> >(tee ${prefix}.log >&2)
     else
         # add DS tagged RG so dorado polish runs
+        echo "no basecaller in header, adding default basecaller" > ${prefix}_model.log
         samtools addreplacerg \\
             $args4 \\
             ${prefix}.bam | \\
@@ -79,7 +80,7 @@ process DORADO_POLISH {
     gzip -n ${prefix}_polished.fasta
 
     # write basecall and polishing model to model log
-    echo "basecall_model: \$(samtools view -H ${prefix}_sorted.bam | grep "^@RG" | tr ' ' '\\n' | grep "basecall_model=" | cut -f 2 -d '=')" > ${prefix}_model.log
+    echo "basecall_model: \$(samtools view -H ${prefix}_sorted.bam | grep "^@RG" | tr ' ' '\\n' | grep "basecall_model=" | cut -f 2 -d '=')" >> ${prefix}_model.log
     echo "polishing_model: \$(grep "Resolved model from input data: " ${prefix}.log | rev | cut -f 1 -d ' ' | rev)" >> ${prefix}_model.log
 
     # docker file does not support heredocs
