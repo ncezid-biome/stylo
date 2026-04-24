@@ -1,0 +1,10 @@
+pipeline_info/*
+**/*.html
+**/*.html
+**/*.svg
+**/*.pdf
+**/*.txt
+**/*.log
+**/*.parquet
+**/*.json
+**/*.txt
