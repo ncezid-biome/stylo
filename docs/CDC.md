@@ -5,7 +5,7 @@ This will allow you to leverage the Rosalind HPC when running stylo. You should 
 
 ```bash
 nextflow run ncezid-biome/stylo \
-   -r v1.4.1 \
+   -r v1.4.3 \
    -c /scicomp/reference-pure/nextflow/nextflow-configs/latest.scicomp.config \
    -profile scicomp_rosalind,singularity \
    --input samplesheet.csv \
