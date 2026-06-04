@@ -38,11 +38,11 @@ authors:
     orcid: 0000-0002-9320-6774
     affiliation: 1
 affiliations: 
- - name: Enteric Diseases Laboratory Branch, Division of Foodborne, Waterborne, and Environmental Diseases, National Center for Emerging and Zoonotic Infectious Diseases, Centers for Disease Control and Prevention, Atlanta, Georgia 
+ - name: Enteric Diseases Laboratory Branch, Division of Foodborne, Waterborne, and Environmental Diseases, National Center for Emerging and Zoonotic Infectious Diseases, Centers for Disease Control and Prevention, Atlanta, Georgia, United States of America 
    index: 1
- - name: ASRT Inc., Contractor for National Center for Emerging and Zoonotic Infectious Diseases, Centers for Disease Control and Prevention, Atlanta, Georgia, USA.
+ - name: ASRT Inc., Contractor for National Center for Emerging and Zoonotic Infectious Diseases, Centers for Disease Control and Prevention, Atlanta, Georgia, United States of America
    index: 2
- - name: Theiagen Genomics, Highlands Ranch, Colorado
+ - name: Theiagen Genomics, Highlands Ranch, Colorado, United States of America
    index: 3
 date: 31 March 2025 
 bibliography: paper.bib 
