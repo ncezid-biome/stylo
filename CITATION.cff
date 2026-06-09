@@ -1,0 +1,64 @@
+cff-version: "1.2.0"
+authors:
+- family-names: Patel
+  given-names: Arzoo
+  orcid: "https://orcid.org/0009-0007-9033-5785"
+- family-names: Thakur
+  given-names: Mohit
+  orcid: "https://orcid.org/0009-0003-2927-6051"
+- family-names: Kim
+  given-names: Justin
+  orcid: "https://orcid.org/0000-0001-8745-9612"
+- family-names: Smith
+  given-names: Peyton
+  orcid: "https://orcid.org/0000-0002-5446-5298"
+- family-names: Katz
+  given-names: Lee S.
+  orcid: "https://orcid.org/0000-0002-2533-9161"
+- family-names: Kapsak
+  given-names: Curtis
+  orcid: "https://orcid.org/0000-0002-8735-1190"
+- family-names: Chen
+  given-names: Jessica
+  orcid: "https://orcid.org/0000-0002-9320-6774"
+doi: 10.5281/zenodo.20548522
+message: If you use this software, please cite our article in the
+  Journal of Open Source Software.
+preferred-citation:
+  authors:
+  - family-names: Patel
+    given-names: Arzoo
+    orcid: "https://orcid.org/0009-0007-9033-5785"
+  - family-names: Thakur
+    given-names: Mohit
+    orcid: "https://orcid.org/0009-0003-2927-6051"
+  - family-names: Kim
+    given-names: Justin
+    orcid: "https://orcid.org/0000-0001-8745-9612"
+  - family-names: Smith
+    given-names: Peyton
+    orcid: "https://orcid.org/0000-0002-5446-5298"
+  - family-names: Katz
+    given-names: Lee S.
+    orcid: "https://orcid.org/0000-0002-2533-9161"
+  - family-names: Kapsak
+    given-names: Curtis
+    orcid: "https://orcid.org/0000-0002-8735-1190"
+  - family-names: Chen
+    given-names: Jessica
+    orcid: "https://orcid.org/0000-0002-9320-6774"
+  date-published: 2026-06-05
+  doi: 10.21105/joss.09695
+  issn: 2475-9066
+  issue: 122
+  journal: Journal of Open Source Software
+  publisher:
+    name: Open Journals
+  start: 9695
+  title: "stylo: a lightweight nanopore assembly pipeline optimized for
+    enteric bacteria"
+  type: article
+  url: "https://joss.theoj.org/papers/10.21105/joss.09695"
+  volume: 11
+title: "stylo: a lightweight nanopore assembly pipeline optimized for
+  enteric bacteria"

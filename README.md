@@ -1,3 +1,5 @@
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.09695/status.svg)](https://doi.org/10.21105/joss.09695)
+
 ## Introduction
 
 **ncezid-biome/stylo** is a bioinformatics pipeline that can be used to filter, downsample, assemble, and QC [ONT](https://nanoporetech.com/) longreads. It takes a samplesheet and FASTQ files as input, performs read filtering, downsampling to specified coverage, assembly, and Quality Control (QC).
@@ -90,10 +92,7 @@ If you would like to contribute to this pipeline, please see the [contributing g
 
 ## Citations
 
-<!-- TODO nf-core: Add citation for pipeline after first release. Uncomment lines below and update Zenodo doi and badge at the top of this file. -->
-<!-- If you use ncezid-biome/stylo for your analysis, please cite it using the following doi: [10.5281/zenodo.XXXXXX](https://doi.org/10.5281/zenodo.XXXXXX) -->
-
-<!-- TODO nf-core: Add bibliography of tools and data used in your pipeline -->
+If you use ncezid-biome/stylo for your analysis, please cite it using the following doi: [10.21105/joss.09695](https://doi.org/10.21105/joss.09695)
 
 An extensive list of references for the tools used by the pipeline can be found in the [`CITATIONS.md`](CITATIONS.md) file.
 
