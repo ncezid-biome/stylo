@@ -42,7 +42,8 @@ workflow POSTPROCESSING_QC {
     //
     DORADO_POLISH (
         ch_processed_reads.combine(DNAAPLER.out.assembly, by:0),
-        params.model_dir
+        params.model_dir,
+        params.model
     )
     ch_versions = ch_versions.mix(DORADO_POLISH.out.versions)
     
