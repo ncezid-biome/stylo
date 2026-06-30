@@ -2,11 +2,12 @@ process DORADO_POLISH {
     tag "$meta.id"
     label 'process_high'
 
-    container "docker://nanoporetech/dorado:shac8f356489fa8b44b31beba841b84d2879de2088e"
+    container "docker://nanoporetech/dorado:sha38b4ce849afa13eac8075f0b41cecd30799f169b"
 
     input:
     tuple val(meta), path(reads), path(assembly)
     path model_dir
+    val model
 
     output:
     tuple val(meta), path("*_polished.fasta.gz")    , emit: assembly
@@ -34,15 +35,18 @@ process DORADO_POLISH {
         $reads \\
         > ${prefix}.bam
 
-    if samtools view -H ${prefix}.bam | grep "^@RG" | grep -q "basecall_model="; then
-        # sort and index bam
-        samtools sort \\
-            -@ $task.cpus \\
-            $args2 \\
-            ${prefix}.bam \\
-            > ${prefix}_sorted.bam
-        samtools index ${prefix}_sorted.bam
+    # sort and index bam
+    samtools sort \\
+        -@ $task.cpus \\
+        $args2 \\
+        ${prefix}.bam \\
+        > ${prefix}_sorted.bam
+    samtools index ${prefix}_sorted.bam
 
+    if samtools view -H ${prefix}.bam | grep "^@RG" | grep -q "basecall_model="; then
+        # write basecalling model to model log
+        echo "basecall_model: \$(samtools view -H ${prefix}_sorted.bam | grep "^@RG" | tr ' ' '\\n' | grep "basecall_model=" | cut -f 2 -d '=')" >> ${prefix}_model.log
+        
         # Call consensus
         dorado polish \\
             -t $task.cpus \\
@@ -53,23 +57,22 @@ process DORADO_POLISH {
             > ${prefix}_polished.fasta \\
             2> >(tee ${prefix}.log >&2)
     else
-        # add DS tagged RG so dorado polish runs
-        echo "no basecaller in header, adding default basecaller" > ${prefix}_model.log
-        samtools addreplacerg \\
-            $args4 \\
-            ${prefix}.bam | \\
-            samtools sort \\
-                -@ $task.cpus \\
-                $args2 \\
-            > ${prefix}_sorted.bam
+        # write basecalling model to model log
+        echo "WARNING: basecalling model not in header, using user defined polishing model" >> ${prefix}_model.log
 
-        samtools index ${prefix}_sorted.bam
-
+        # download model if it isn't in the model_dir
+        if [ ! -d $model_dir/$model/ ]; then
+            dorado download \\
+                --model $model \\
+                --models-directory $model_dir \\
+                $args4
+        fi
+        
         # Call consensus
         dorado polish \\
             -t $task.cpus \\
             --models-directory $model_dir \\
-            --RG basecaller \\
+            --model-override $model_dir/$model/ \\
             $args3 \\
             ${prefix}_sorted.bam \\
             $assembly \\
@@ -77,11 +80,10 @@ process DORADO_POLISH {
             2> >(tee ${prefix}.log >&2)
     fi
 
-    gzip -n ${prefix}_polished.fasta
+    bgzip ${prefix}_polished.fasta
 
-    # write basecall and polishing model to model log
-    echo "basecall_model: \$(samtools view -H ${prefix}_sorted.bam | grep "^@RG" | tr ' ' '\\n' | grep "basecall_model=" | cut -f 2 -d '=')" >> ${prefix}_model.log
-    echo "polishing_model: \$(grep "Resolved model from input data: " ${prefix}.log | rev | cut -f 1 -d ' ' | rev)" >> ${prefix}_model.log
+    # write polishing model to model log
+    echo "polishing_model: \$(grep "Resolved model from" ${prefix}.log | rev | cut -f 1 -d ' ' | rev)" >> ${prefix}_model.log
 
     # docker file does not support heredocs
     echo "${task.process}:" > versions.yml
