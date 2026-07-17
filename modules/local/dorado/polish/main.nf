@@ -1,8 +1,10 @@
 process DORADO_POLISH {
     tag "$meta.id"
     label 'process_high'
-
-    container "docker://nanoporetech/dorado:sha38b4ce849afa13eac8075f0b41cecd30799f169b"
+    beforeScript "echo before; mkdir -p ${params.model_dir}"
+    container "${ workflow.containerEngine == 'singularity' ?
+        'docker://nanoporetech/dorado:sha38b4ce849afa13eac8075f0b41cecd30799f169b' :
+        'docker.io/nanoporetech/dorado:sha38b4ce849afa13eac8075f0b41cecd30799f169b' }"
 
     input:
     tuple val(meta), path(reads), path(assembly)
@@ -24,8 +26,6 @@ process DORADO_POLISH {
     def args4 = task.ext.args4 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    mkdir -p \$(readlink $model_dir)
-
     #https://software-docs.nanoporetech.com/dorado/latest/assembly/polish/
     # Align reads to a reference using dorado aligner, sort and index
     dorado aligner \\
